@@ -1,11 +1,12 @@
 ﻿using KelsonBall.Transforms;
+using Render.Core.Vectors;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
 
 namespace KelsonBall.Geometry
 {
-    public abstract class Perimeter : IBorder<Vector2>, ITransformable<Perimeter, Vector2>, IComposable<Perimeter>
+    public abstract class Perimeter : IBorder<rVector>, ITransformable<Perimeter, rVector>, IComposable<Perimeter>
     {
 
         public Perimeter And(Perimeter region)
@@ -28,14 +29,14 @@ namespace KelsonBall.Geometry
             throw new NotImplementedException();
         }
 
-        public virtual Perimeter Transform(Transform<Vector2> transform)
+        public virtual Perimeter Transform(Transform<rVector> transform)
         {
             throw new NotImplementedException();
         }
 
-        public abstract IEnumerable<Vector2> Intersections(Ray<Vector2> ray);
+        public abstract IEnumerable<rVector> Intersections(Ray<rVector> ray);
 
-        public Vector2[] VertexArray()
+        public rVector[] VertexArray()
         {
             throw new NotImplementedException();
         }

@@ -53,18 +53,18 @@ namespace Render.Core.Transforms
 
         public OrthoFrame ScaleBy(double x, double y)
         {
-            return ScaleBy(new rVector3((float)x, 0f, (float)y));
+            return ScaleBy(new rVector((float)x, (float)y));
         }
 
-        public OrthoFrame ScaleBy(rVector3 s)
+        public OrthoFrame ScaleBy(rVector s)
         {
-            Scale = new rVector3(Scale.X * s.X, Scale.Y * s.Y, Scale.Z * s.Z);
+            Scale = new rVector3(Scale.X * s.X, 1, Scale.Y * s.Y).ToVector();
             return this;
         }
 
         private Transform<rVector3> rotationTransform = Transform3.Rotation(0, 1, 0, 0);
         private rVector3 rotation;
-        private double Rotation
+        public double Rotation
         {
             get => rotation.Y;
             set

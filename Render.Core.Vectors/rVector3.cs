@@ -17,6 +17,7 @@ namespace Render.Core.Vectors
 
         public static rVector3 one => new rVector3(1, 1, 1);
 
+        // so it's hard to type 'î', 'ĵ', and 'k̂' on your keyboard, but that's what intellisense is for
         public static rVector3 î => new rVector3(1, 0, 0);
 
         public static rVector3 ĵ => new rVector3(0, 1, 0);
@@ -70,6 +71,7 @@ namespace Render.Core.Vectors
             return a.Scale(1 / b);
         }
 
+        #region Situation: there are too many vector classes. Solution: create a new vector class with implicit conversions to them all. New Situation: there are even more vector classes, and the new one is a parody of itself
         public static implicit operator OpenTK.Vector3 (rVector3 p) => new OpenTK.Vector3((float)p.X, (float)p.Y, (float)p.Z);
 
         public static implicit operator rVector3 (OpenTK.Vector3 v) => new rVector3(v.X, v.Y, v.Z);
@@ -81,6 +83,11 @@ namespace Render.Core.Vectors
         public static implicit operator Microsoft.Xna.Framework.Vector3(rVector3 p) => new Microsoft.Xna.Framework.Vector3((float)p.X, (float)p.Y, (float)p.Z);
 
         public static implicit operator rVector3(Microsoft.Xna.Framework.Vector3 v) => new rVector3(v.X, v.Y, v.Z);
+
+        public static implicit operator MathNet.Numerics.LinearAlgebra.Vector<double>(rVector3 p) => VectorConversions.GetMathVector(p.X, p.Y, p.Z);
+
+        public static implicit operator rVector3(MathNet.Numerics.LinearAlgebra.Vector<double> v) => new rVector3(v[0], v[1], v[2]);
+        #endregion
 
         public rVector ToVector () => new rVector(X, Z);
 

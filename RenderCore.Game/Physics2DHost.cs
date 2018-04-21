@@ -24,7 +24,7 @@ namespace RenderCore.Game
         public override void Add(GameObject child)
         {
             if (child is Physics2DObject item)
-                physicsMap.Add((item.BodyFactory(Host), item));
+                physicsMap.Add((item.GetPhysicsBody(Host), item));
             else
                 throw a.fit();
             base.Add(child);

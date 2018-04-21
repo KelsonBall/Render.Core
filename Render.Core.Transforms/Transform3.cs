@@ -18,13 +18,13 @@ namespace KelsonBall.Transforms
         public override rVector3 ApplyTo(rVector3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
-            return (transform * affineVector).ToPVector3();
+            return (transform * affineVector);
         }
 
         public override rVector3 ApplyInverse(rVector3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
-            return (inverse * affineVector).ToPVector3();
+            return (inverse * affineVector);
         }
 
         private Transform3() : base(4) { }

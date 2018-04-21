@@ -37,7 +37,7 @@ namespace KelsonBall.Geometry.Areas
             return this;
         }
 
-        public override bool Contains(Vector2 point)
+        public override bool Contains(rVector point)
         {
             bool result = Root.Contains(point);
             foreach (var operation in Operations)

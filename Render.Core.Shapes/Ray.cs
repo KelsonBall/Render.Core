@@ -1,6 +1,6 @@
 ﻿using KelsonBall.Transforms;
+using Render.Core.Vectors;
 using System;
-using System.Numerics;
 
 namespace KelsonBall.Geometry
 {
@@ -20,31 +20,31 @@ namespace KelsonBall.Geometry
         public abstract Ray<T> ApplyInverse(Transform<T> transform);
     }
 
-    public class Ray2 : Ray<Vector2>
+    public class Ray2 : Ray<rVector>
     {
-        public Ray2(Vector2 o, Vector2 d) : base(o, default(Vector2) /* d.Unit() */) { throw new NotImplementedException(); }
+        public Ray2(rVector o, rVector d) : base(o, default(rVector) /* d.Unit() */) { throw new NotImplementedException(); }
 
-        public override Ray<Vector2> ApplyTransform(Transform<Vector2> transform)
+        public override Ray<rVector> ApplyTransform(Transform<rVector> transform)
         {
             return new Ray2(transform.ApplyTo(Origin), transform.ApplyTo(Direction));
         }
 
-        public override Ray<Vector2> ApplyInverse(Transform<Vector2> transform)
+        public override Ray<rVector> ApplyInverse(Transform<rVector> transform)
         {
             return new Ray2(transform.ApplyInverse(Origin), transform.ApplyInverse(Direction));
         }
     }
 
-    public class Ray3 : Ray<Vector3>
+    public class Ray3 : Ray<rVector3>
     {
-        public Ray3(Vector3 o, Vector3 d) : base(o, default(Vector3) /* d.Unit() */) { }
+        public Ray3(rVector3 o, rVector3 d) : base(o, default(rVector3) /* d.Unit() */) { }
 
-        public override Ray<Vector3> ApplyTransform(Transform<Vector3> transform)
+        public override Ray<rVector3> ApplyTransform(Transform<rVector3> transform)
         {
             return new Ray3(transform.ApplyTo(Origin), transform.ApplyTo(Direction));
         }
 
-        public override Ray<Vector3> ApplyInverse(Transform<Vector3> transform)
+        public override Ray<rVector3> ApplyInverse(Transform<rVector3> transform)
         {
             return new Ray3(transform.ApplyInverse(Origin), transform.ApplyInverse(Direction));
         }

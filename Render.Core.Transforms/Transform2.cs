@@ -21,13 +21,13 @@ namespace KelsonBall.Transforms
         public override rVector ApplyTo(rVector v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 1);
-            return (transform * affineVector).ToPVector();
+            return ((rVector3)(transform * affineVector)).ToVector();
         }
 
         public override rVector ApplyInverse(rVector v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 1);
-            return (inverse * affineVector).ToPVector();
+            return ((rVector3)(inverse * affineVector)).ToVector();
         }
 
         internal static Transform2 Translation(double x, double y)

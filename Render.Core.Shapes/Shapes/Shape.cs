@@ -1,14 +1,14 @@
 ﻿using KelsonBall.Geometry.Areas;
 using KelsonBall.Transforms;
+using Render.Core.Vectors;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace KelsonBall.Geometry.Shapes
 {
-    public abstract class Shape : IBorder<Vector2>, IRegion<Vector2>, IComposable<Shape>, ITransformable<Shape, Vector2>
+    public abstract class Shape : IBorder<rVector>, IRegion<rVector>, IComposable<Shape>, ITransformable<Shape, rVector>
     {
-        private readonly TransformStack<Vector2> transformStack = Transform2.NewTransformStack();
+        private readonly TransformStack<rVector> transformStack = Transform2.NewTransformStack();
 
         public Area Area { get; private set; }
         public Perimeter Perimeter { get; private set; }
@@ -24,12 +24,12 @@ namespace KelsonBall.Geometry.Shapes
             throw new NotImplementedException();
         }
 
-        public bool Contains(Vector2 point)
+        public bool Contains(rVector point)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Vector2> Intersections(Ray<Vector2> ray)
+        public IEnumerable<rVector> Intersections(Ray<rVector> ray)
         {
             foreach (var intersect in Perimeter.Intersections(ray))
                 if (Area.Contains(intersect))
@@ -46,14 +46,14 @@ namespace KelsonBall.Geometry.Shapes
             throw new NotImplementedException();
         }
 
-        public Shape Transform(Transform<Vector2> transform)
+        public Shape Transform(Transform<rVector> transform)
         {
             Area.Transform(transform);
             Perimeter.Transform(transform);
             return this;
         }
 
-        public Vector2[] VertexArray()
+        public rVector[] VertexArray()
         {
             throw new NotImplementedException();
         }

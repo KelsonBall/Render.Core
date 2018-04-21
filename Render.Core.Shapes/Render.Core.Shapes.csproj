@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Core.Transforms\Render.Core.Transforms.csproj" />
+  </ItemGroup>
+
 </Project>

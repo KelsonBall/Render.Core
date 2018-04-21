@@ -6,14 +6,14 @@ namespace KelsonBall.Geometry.Shapes.Primitives
 {
     public interface IRectangle
     {
-        Vector2 Dimensions { get; }
+        rVector Dimensions { get; }
     }
 
     public class Rectangle : Shape, IRectangle
     {
-        public Vector2 Dimensions { get; private set; }
+        public rVector Dimensions { get; private set; }
 
-        public Rectangle(Vector2 dimensions) : base(new RectangleArea(dimensions), new RectanglePerimeter(dimensions))
+        public Rectangle(rVector dimensions) : base(new RectangleArea(dimensions), new RectanglePerimeter(dimensions))
         {
             throw new System.NotImplementedException();
         }
@@ -21,12 +21,12 @@ namespace KelsonBall.Geometry.Shapes.Primitives
 
     public class RectangleArea : Area
     {
-        public RectangleArea(Vector2 dimensions)
+        public RectangleArea(rVector dimensions)
         {
             throw new System.NotImplementedException();
         }
 
-        public override bool Contains(Vector2 point)
+        public override bool Contains(rVector point)
         {
             throw new System.NotImplementedException();
         }
@@ -34,12 +34,12 @@ namespace KelsonBall.Geometry.Shapes.Primitives
 
     public class RectanglePerimeter : Perimeter
     {
-        public RectanglePerimeter(Vector2 dimensions)
+        public RectanglePerimeter(rVector dimensions)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IEnumerable<Vector2> Intersections(Ray<Vector2> ray)
+        public override IEnumerable<rVector> Intersections(Ray<rVector> ray)
         {
             throw new System.NotImplementedException();
         }

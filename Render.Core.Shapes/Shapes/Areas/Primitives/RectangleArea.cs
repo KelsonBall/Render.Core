@@ -6,14 +6,14 @@ namespace KelsonBall.Geometry.Shapes.Areas.Primitives
 {
     public class RectangleArea : Area, IRectangle
     {
-        public Vector2 Dimensions { get; private set; }
+        public rVector Dimensions { get; private set; }
 
-        public RectangleArea(Vector2 dimensions)
+        public RectangleArea(rVector dimensions)
         {
             Dimensions = dimensions;
         }
 
-        public override bool Contains(Vector2 point)
+        public override bool Contains(rVector point)
         {
             return (point.X >= -Dimensions.X && point.X <= Dimensions.X)
                 && (point.Y >= -Dimensions.Y && point.Y <= Dimensions.Y);

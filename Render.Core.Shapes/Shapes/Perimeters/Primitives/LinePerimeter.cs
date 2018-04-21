@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Render.Core.Vectors;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -13,7 +14,7 @@ namespace KelsonBall.Geometry.Perimeters.Primitives
             Length = length;
         }
 
-        public override IEnumerable<Vector2> Intersections(Ray<Vector2> ray)
+        public override IEnumerable<rVector> Intersections(Ray<rVector> ray)
         {
             throw new NotImplementedException();
         }

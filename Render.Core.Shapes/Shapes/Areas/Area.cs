@@ -3,9 +3,9 @@ using System.Numerics;
 
 namespace KelsonBall.Geometry.Areas
 {
-    public abstract class Area : IRegion<Vector2>, IComposable<Area>, ITransformable<Area, Vector2>
+    public abstract class Area : IRegion<rVector>, IComposable<Area>, ITransformable<Area, rVector>
     {
-        public abstract bool Contains(Vector2 point);
+        public abstract bool Contains(rVector point);
 
         public virtual Area And(Area region)
         {
@@ -27,7 +27,7 @@ namespace KelsonBall.Geometry.Areas
             return new CompositeArea(this).XOr(region);
         }
 
-        public virtual Area Transform(Transform<Vector2> transform)
+        public virtual Area Transform(Transform<rVector> transform)
         {
             var area = new TransformArea(this);
             area.Transform(transform);

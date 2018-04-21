@@ -41,6 +41,7 @@ namespace Render.Core.Vectors
 
         public static bool operator !=(rVector a, rVector b) => !(a == b);
 
+        #region Situation: there are too many vector classes. Solution: create a new vector class with implicit conversions to them all. New Situation: there are even more vector classes, and the new one is a parody of itself
         public static implicit operator OpenTK.Vector2(rVector p) => new OpenTK.Vector2((float)p.X, (float)p.Y);
 
         public static implicit operator rVector(OpenTK.Vector2 v) => new rVector(v.X, v.Y);
@@ -49,9 +50,14 @@ namespace Render.Core.Vectors
 
         public static implicit operator rVector(System.Numerics.Vector2 v) => new rVector(v.X, v.Y);
 
+        public static implicit operator MathNet.Numerics.LinearAlgebra.Vector<double>(rVector p) => VectorConversions.GetMathVector(p.X, p.Y);
+
+        public static implicit operator rVector(MathNet.Numerics.LinearAlgebra.Vector<double> v) => new rVector(v[0], v[1]);
+
         public static implicit operator Microsoft.Xna.Framework.Vector2(rVector p) => new Microsoft.Xna.Framework.Vector2((float)p.X, (float)p.Y);
 
         public static implicit operator rVector(Microsoft.Xna.Framework.Vector2 v) => new rVector(v.X, v.Y);
+        #endregion
 
         public static implicit operator rVector((double x, double y) p) => new rVector(p.x, p.y);
 

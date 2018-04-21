@@ -11,7 +11,7 @@ namespace KelsonBall.LudumDare41.Game
             using (var canvas = Window.New(800, 680))
             {
                 var scenes = new SceneManager(canvas);
-                scenes.AddSceneFactory("Main", () => Scene.PlanetRunner(canvas));
+                scenes.AddSceneFactory("Main", () => Scenes.Demo(canvas));
                 scenes.OpenScene("Main");
 
                 canvas.Show();
