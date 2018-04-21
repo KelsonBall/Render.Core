@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KelsonBall.Render.Core\KelsonBall.Render.Core.csproj" />
+    <ProjectReference Include="..\Physics\Physics.csproj" />
+    <ProjectReference Include="..\Render.Core.BadPuns\Render.Core.BadPuns.csproj" />
+    <ProjectReference Include="..\Render.Core.Transforms\Render.Core.Transforms.csproj" />
+  </ItemGroup>
+
+</Project>

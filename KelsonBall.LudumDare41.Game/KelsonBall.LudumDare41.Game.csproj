@@ -5,4 +5,15 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OpenTK.NETCore" Version="1.1.2749.6433" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KelsonBall.LudumDare41.Scenes\KelsonBall.LudumDare41.Scenes.csproj" />
+    <ProjectReference Include="..\KelsonBall.Render.Core\KelsonBall.Render.Core.csproj" />
+    <ProjectReference Include="..\Render.Core.Vectors\Render.Core.Vectors.csproj" />
+    <ProjectReference Include="..\RenderCore.Game\RenderCore.Game.csproj" />
+  </ItemGroup>
+
 </Project>

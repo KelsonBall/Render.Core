@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KelsonBall.LudumDare41.Scenes;
+using Render.Core;
+using RenderCore.Game;
 
 namespace KelsonBall.LudumDare41.Game
 {
@@ -6,7 +8,14 @@ namespace KelsonBall.LudumDare41.Game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (var canvas = Window.New(800, 680))
+            {
+                var scenes = new SceneManager(canvas);
+                scenes.AddSceneFactory("Main", () => Scene.PlanetRunner(canvas));
+                scenes.OpenScene("Main");
+
+                canvas.Show();
+            }
         }
     }
 }
