@@ -3,7 +3,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 using System.Collections.Generic;
 using static System.Linq.Enumerable;
 
-namespace KelsonBall.Transforms
+namespace Render.Core.Transforms
 {
     public abstract class Transform<T>
     {

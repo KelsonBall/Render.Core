@@ -5,7 +5,7 @@ using System;
 
 namespace KelsonBall.LudumDare41.Scenes
 {
-    public static class Scenes
+    public static class SceneFactory
     {
         public static Scene PlanetRunner(ICanvas canvas)
         {
@@ -22,8 +22,34 @@ namespace KelsonBall.LudumDare41.Scenes
                 {
                     new ScreenObject(s =>
                     {
-                        s.Draw
-                    })
+                        s.Transform.TranslateBy(100, 100);
+                        s.OnDraw += _ =>
+                            canvas.WithStyle(() =>
+                            {
+                                canvas.Fill = Color.Constants.Red;
+                                canvas.Ellipse((0, 0), (10, 10));
+                            });
+                    }),
+                    new ScreenObject(s =>
+                    {
+                        s.Transform.TranslateBy(0, 100);
+                        s.OnDraw += _ =>
+                            canvas.WithStyle(() =>
+                            {
+                                canvas.Fill = Color.Constants.Blue;
+                                canvas.Ellipse((0, 0), (10, 10));
+                            });
+                    }),
+                    new ScreenObject(s =>
+                    {
+                        s.Transform.TranslateBy(100, 0);
+                        s.OnDraw += _ =>
+                            canvas.WithStyle(() =>
+                            {
+                                canvas.Fill = Color.Constants.Green;
+                                canvas.Ellipse((0, 0), (10, 10));
+                            });
+                    }),
                 };
             });
 

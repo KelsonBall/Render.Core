@@ -2,7 +2,7 @@
 using Render.Core.Vectors;
 using static System.Math;
 
-namespace KelsonBall.Transforms
+namespace Render.Core.Transforms
 {
 
     public class Transform2 : Transform<rVector>

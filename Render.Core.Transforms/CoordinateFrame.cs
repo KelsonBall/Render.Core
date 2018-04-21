@@ -1,6 +1,6 @@
 ﻿using Render.Core.Vectors;
 
-namespace KelsonBall.Transforms
+namespace Render.Core.Transforms
 {
     /// <summary>
     /// A transform implementation providing full 4x4 afine transformation matricies for linear transformations in R3 space
@@ -121,13 +121,13 @@ namespace KelsonBall.Transforms
         public override rVector3 ApplyTo(rVector3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
-            return (transform * affineVector).ToPVector3();
+            return (transform * affineVector);
         }
 
         public override rVector3 ApplyInverse(rVector3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
-            return (Inverse * affineVector).ToPVector3();
+            return (Inverse * affineVector);
         }
     }
 }
