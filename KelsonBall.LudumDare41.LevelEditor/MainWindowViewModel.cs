@@ -9,6 +9,8 @@ using System.Windows.Input;
 using KelsonBall.LudumDare41.LevelEditor.Utils;
 using Render.Core.Textures;
 using System.IO;
+using Render.Core;
+using KelsonBall.LudumDare41.Assets;
 
 namespace KelsonBall.LudumDare41.LevelEditor
 {
@@ -68,6 +70,13 @@ namespace KelsonBall.LudumDare41.LevelEditor
             set => Set(() => _itemNames = value);
         }
 
+        private ObservableCollection<string> _assetNames = new ObservableCollection<string>();
+        public ObservableCollection<string> AssetNames
+        {
+            get => _assetNames;
+            set => Set(() => _assetNames = value);
+        }
+
         private string _selectedItemNameToAdd;
         public string SelectedItemNameToAdd
         {
@@ -105,7 +114,8 @@ namespace KelsonBall.LudumDare41.LevelEditor
             Properties = new PropertiesPanelViewModel();
             Toolbar = new ToolbarViewModel();
             ItemNames.AddRange(MapItemTypes.Select(t => t.Name));
-
+            ResourceManager.RegisterResourceAssembly("Assets", "KelsonBall.LudumDare41.Assets", Art.Assembly);
+            AssetNames.AddRange()
             OpenCommand = new ActionCommand(OpenAction);
 
             this.Subscribe<MapItemSelectedEvent>(args => SelectedItem = args.Vm);
@@ -129,23 +139,12 @@ namespace KelsonBall.LudumDare41.LevelEditor
 
         public void OpenAction()
         {
-            var dialog = new OpenFileDialog
-            {
-                Filter = "Map Asset Files|*.bmp;*.map",
-                CheckFileExists = true,
-            };
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                if (dialog.FileName.EndsWith(".bmp"))
-                {
-                    this.Publish(new MapImagePickedEvent(dialog.FileName));
-                    map = new Bitmap(File.ReadAllBytes(dialog.FileName));
-                    MapWidth = (int)map.ImageData.Width;
-                    xToLeftConverter.HalfWidth = MapWidth / 2;
-                    MapHeight = (int)map.ImageData.Height;
-                    yToTopConverter.HalfHeight = MapHeight / 2;
-                }
-            }
+
+        }
+
+        public void SaveAction()
+        {
+            DirectoryInfo dir = new DirectoryInfo(@"..\..\..\..\KelsonBall.LudumDare41.Assets\Levels");
         }
     }
 }

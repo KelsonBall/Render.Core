@@ -11,6 +11,19 @@ namespace Render.Core
         private static readonly Dictionary<string, (string name, Assembly assembly)> resourceMap = new Dictionary<string, (string, Assembly)>();
         private static readonly Dictionary<string, byte[]> assetCache = new Dictionary<string, byte[]>();
 
+        [Flags]
+        public enum ResourceType
+        {
+            Bitmap      = 1,
+            Tga24       = 3,
+            Tga32       = 2,
+            Tga32Sheet  = 4,
+
+
+        }
+
+        public static IEnumerable<string>
+
         private static readonly HashSet<string> prefixes = new HashSet<string>();
 
         public static void RegisterResourceAssembly(string prefix, string @namespace, Assembly assembly)
