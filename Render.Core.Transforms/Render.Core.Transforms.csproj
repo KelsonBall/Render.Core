@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Render.Core.BadPuns\Render.Core.BadPuns.csproj" />
     <ProjectReference Include="..\Render.Core.Vectors\Render.Core.Vectors.csproj" />
   </ItemGroup>
 

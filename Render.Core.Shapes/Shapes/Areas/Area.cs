@@ -1,5 +1,5 @@
 ﻿using Render.Core.Transforms;
-using System.Numerics;
+using Render.Core.Vectors;
 
 namespace KelsonBall.Geometry.Areas
 {

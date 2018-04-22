@@ -17,7 +17,19 @@ namespace KelsonBall.LudumDare41.Scenes
             {
                 MainScene.Camera = new Camera(MainCamera =>
                 {
-                    MainCamera.AddBehavior(new CameraBehavior(canvas));
+                    MainCamera.AddBehavior(new Behavior
+                    {
+                        Name = "Camera Behavior",
+                        Load = () => { },
+                        Update = (TimeSpan time) =>
+                        {
+                            if (canvas.Keyboard.KeyIsPressed(Key.Q))
+                                MainCamera.Transform.RotateBy(-.05);
+                            if (canvas.Keyboard.KeyIsPressed(Key.E))
+                                MainCamera.Transform.RotateBy(.05);
+
+                        },
+                    });
                 })
                 {
                     new ScreenObject(s =>
@@ -50,41 +62,44 @@ namespace KelsonBall.LudumDare41.Scenes
                                 canvas.Ellipse((0, 0), (10, 10));
                             });
                     }),
+                    new ScreenObject(s =>
+                    {
+                        s.Transform.TranslateBy(100, 0);
+                        s.OnDraw += _ =>
+                            canvas.WithStyle(() =>
+                            {
+                                canvas.Fill = Color.Constants.White;
+                                canvas.Line((0, 0), (-100, -100));
+                                canvas.Ellipse((-100, -100), (10, 10));
+                            });
+                    }),
+                    new ScreenObject(bob =>
+                    {
+                        bob.OnDraw += _ =>
+                            canvas.WithStyle(() =>
+                            {
+                                canvas.Fill = Color.Constants.Crimson;
+                                canvas.Triangle((-5, 5), (-5, -5), (7, 0));
+                            });
+
+                        bob.AddBehavior(new Behavior
+                        {
+                            Name = "Bob Behavior",
+                            Update = (TimeSpan time) =>
+                            {
+                                if (canvas.Keyboard.KeyIsPressed(Key.W))
+                                    bob.Transform.TranslateBy(bob.Transform.Forward);
+                                if (canvas.Keyboard.KeyIsPressed(Key.S))
+                                    bob.Transform.TranslateBy(-bob.Transform.Forward);
+                                if (canvas.Keyboard.KeyIsPressed(Key.A))
+                                    bob.Transform.RotateBy(-.1);
+                                if (canvas.Keyboard.KeyIsPressed(Key.D))
+                                    bob.Transform.RotateBy(0.1);
+                            },
+
+                        });
+                    })
                 };
             });
-
-        public class CameraBehavior : IBehavior
-        {
-            public string Name { get; set; } = "Camera Behavior";
-            public bool Active { get; set; }
-
-            private readonly ICanvas canvas;
-            private Camera camera;
-
-            public CameraBehavior(ICanvas canvas)
-            {
-                this.canvas = canvas;
-            }
-
-
-
-            public void InvokeLoad(GameObject self, TimeSpan time)
-            {
-                camera = (Camera)self;
-            }
-
-            public void InvokeUpdate(GameObject self, TimeSpan time)
-            {
-                //throw new NotImplementedException();
-                if (canvas.Keyboard.KeyIsPressed(Key.W))
-                    camera.Transform.TranslateBy((0, 1));
-                if (canvas.Keyboard.KeyIsPressed(Key.S))
-                    camera.Transform.TranslateBy((0, -1));
-                if (canvas.Keyboard.KeyIsPressed(Key.A))
-                    camera.Transform.TranslateBy((1, 0));
-                if (canvas.Keyboard.KeyIsPressed(Key.D))
-                    camera.Transform.TranslateBy((-1, 0));
-            }
-        }
     }
 }

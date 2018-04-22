@@ -8,7 +8,7 @@ namespace RenderCore.Game
     {
         private object currentSceneLock = new object();
 
-        public GameObject Current;
+        public Scene Current;
 
         private readonly Dictionary<string, Func<Scene>> Scenes = new Dictionary<string, Func<Scene>>();
 

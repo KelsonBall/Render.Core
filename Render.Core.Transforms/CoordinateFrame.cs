@@ -22,8 +22,8 @@ namespace Render.Core.Transforms
         protected void Calculate()
         {
             var stack = Transform3.NewTransformStack();
-            stack.Push(translationTransform);
             stack.Push(rotationTransform);
+            stack.Push(translationTransform);
             stack.Push(scaleTransform);
             Matrix = stack.Aggregate.Matrix;
         }

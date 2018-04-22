@@ -1,4 +1,4 @@
-﻿using Render.Core.Transforms;
+﻿using Render.Core.BadPuns;
 using Render.Core.Vectors;
 
 namespace Render.Core.Transforms
@@ -18,6 +18,13 @@ namespace Render.Core.Transforms
 
         public OrthoFrame() : base(4)
         {
+        }
+
+        public OrthoFrame(double[,] origin) : base(origin)
+        {
+            if (origin.GetLength(0) != 4 || origin.GetLength(1) != 4)
+                throw a.fit();
+            Calculate();
         }
 
         protected void Calculate()
@@ -40,7 +47,7 @@ namespace Render.Core.Transforms
             set
             {
                 scale = value.ToVector3();
-                scaleTransform = Transform3.Scale(new rVector3(value.X, 1, value.Y));
+                scaleTransform = Transform3.Scale(new rVector3(value.X, value.Y, 1));
                 Calculate();
             }
         }
@@ -71,7 +78,7 @@ namespace Render.Core.Transforms
             {
                 rotation = new rVector3(0, value, 0);
                 var stack = Transform3.NewTransformStack();
-                stack.Push(Transform3.Rotation(value, rVector3.ĵ));
+                stack.Push(Transform3.Rotation(value, rVector3.k̂));
                 rotationTransform = stack.Aggregate;
                 Calculate();
             }
@@ -112,13 +119,13 @@ namespace Render.Core.Transforms
 
         public rVector ApplyTo(rVector v)
         {
-            var affineVector = VectorConversions.GetMathVector(v.X, 0, v.Y, 1);
+            var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 0, 1);
             return ((transform * affineVector).ToRVector3()).ToVector();
         }
 
         public rVector ApplyInverse(rVector v)
         {
-            var affineVector = VectorConversions.GetMathVector(v.X, 0, v.Y, 1);
+            var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 0, 1);
             return (Inverse * affineVector).ToRVector3().ToVector();
         }
 

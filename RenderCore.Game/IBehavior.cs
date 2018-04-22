@@ -2,11 +2,12 @@
 
 namespace RenderCore.Game
 {
-    public interface IBehavior
+    public class Behavior
     {
-        string Name { get; set; }
-        bool Active { get; set; }
-        void InvokeLoad(GameObject self, TimeSpan time);
-        void InvokeUpdate(GameObject self, TimeSpan time);
+        public string Name { get; set; }
+        public bool Active { get; set; } = true;
+
+        public Action Load { get; set; }
+        public Action<TimeSpan> Update { get; set; }
     }
 }

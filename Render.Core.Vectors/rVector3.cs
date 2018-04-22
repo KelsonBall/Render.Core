@@ -41,6 +41,8 @@ namespace Render.Core.Vectors
             return a.Add(new rVector3(-b.X, -b.Y, -b.Z));
         }
 
+        public static rVector3 operator -(rVector3 a) => (-a.X, -a.Y, -a.Z);
+
         public static rVector3 operator *(rVector3 a, rVector3 b)
         {
             return a.Cross(b);
@@ -89,7 +91,7 @@ namespace Render.Core.Vectors
         public static implicit operator rVector3(MathNet.Numerics.LinearAlgebra.Vector<double> v) => new rVector3(v[0], v[1], v[2]);
         #endregion
 
-        public rVector ToVector () => new rVector(X, Z);
+        public rVector ToVector () => new rVector(X, Y);
 
         public static implicit operator rVector3 ((double x, double y, double z) p) => new rVector3(p.x, p.y, p.z);
 

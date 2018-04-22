@@ -1,6 +1,7 @@
 ﻿using KelsonBall.Geometry.Shapes.Primitives;
 using System.Numerics;
 using KelsonBall.Geometry.Areas;
+using Render.Core.Vectors;
 
 namespace KelsonBall.Geometry.Shapes.Areas.Primitives
 {

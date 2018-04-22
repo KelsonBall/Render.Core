@@ -65,7 +65,7 @@ namespace RenderCore.Game
             child.Parent = this;
             _children.Add(child);
             foreach (var behavior in child.Behaviors)
-                behavior.InvokeLoad(child, TimeSpan.FromSeconds(0));
+                behavior.Load?.Invoke();
         }
 
         public void Remove()
@@ -74,14 +74,14 @@ namespace RenderCore.Game
             Events.Remove();
         }
 
-        private readonly Dictionary<string, IBehavior> _behaviors = new Dictionary<string, IBehavior>();
-        public IEnumerable<IBehavior> Behaviors => _behaviors.Values.AsEnumerable();
+        private readonly Dictionary<string, Behavior> _behaviors = new Dictionary<string, Behavior>();
+        public IEnumerable<Behavior> Behaviors => _behaviors.Values.AsEnumerable();
 
-        public void AddBehavior(IBehavior behavior)
+        public void AddBehavior(Behavior behavior)
         {
             _behaviors.Add(behavior.Name, behavior);
             if (Parent != null)
-                behavior.InvokeLoad(this, TimeSpan.FromSeconds(0));
+                behavior.Load?.Invoke();
         }
 
         private Dictionary<string, object> _properties;
@@ -114,7 +114,7 @@ namespace RenderCore.Game
             foreach (var child in Children)
                 child.Update(time);
             foreach (var behavior in Behaviors)
-                behavior.InvokeUpdate(this, time);
+                behavior.Update?.Invoke(time);
         }
 
         public IEnumerator<GameObject> GetEnumerator() => Children.GetEnumerator();

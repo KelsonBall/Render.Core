@@ -27,6 +27,8 @@ namespace Render.Core.Vectors
 
         public static rVector operator -(rVector a, rVector b) => a.Add(new rVector(-b.X, -b.Y));
 
+        public static rVector operator -(rVector a) => (-a.X, -a.Y);
+
         public static rVector operator *(rVector a, double b) => a.Scale(b);
 
         public static rVector operator *(rVector a, int b) => a.Scale(b);
@@ -69,7 +71,7 @@ namespace Render.Core.Vectors
 
         public rVector Perpendicular() => new rVector(-Y, X).Unit();
 
-        public rVector3 ToVector3() => new rVector3(X, 0, Y);
+        public rVector3 ToVector3() => new rVector3(X, Y, 0);
 
         public rVector Add(rVector to) => new rVector(X + to.X, Y + to.Y);
 

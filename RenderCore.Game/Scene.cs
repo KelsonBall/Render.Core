@@ -23,10 +23,11 @@ namespace RenderCore.Game
 
         public override void Update(TimeSpan time)
         {
+            Camera.Update(time);
             foreach (var child in Children.Where(c => c != Camera))
                 child.Update(time);
             foreach (var behavior in Behaviors)
-                behavior.InvokeUpdate(this, time);
+                behavior.Update?.Invoke(time);
         }
 
         public override void Render(ICanvas canvas)

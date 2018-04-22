@@ -16,6 +16,7 @@ namespace Render.Core.Transforms
 
         private Transform2(double[,] matrix) : base(matrix)
         {
+
         }
 
         public override rVector ApplyTo(rVector v)

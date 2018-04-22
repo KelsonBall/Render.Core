@@ -133,7 +133,8 @@ namespace Render.Core.Implementation
         private MouseDevice _mouse;
         public IMouseDevice Mouse { get => _mouse; }
 
-        public IKeyboardDevice Keyboard { get; private set; }
+        private KeyboardDevice _keyboard;
+        public IKeyboardDevice Keyboard { get => _keyboard; }
 
         public IPointerDevice Pointer { get; private set; }
 
@@ -172,12 +173,17 @@ namespace Render.Core.Implementation
 
         private void BindWindow(IWindow window)
         {
-            var mouse = new MouseDevice();
-            window.OnMouseDownEvent += e => mouse.InvokeMouseButtonDown(toLocal(e.Button), window.Mouse.GetState());
-            window.OnMouseUpEvent += e => mouse.InvokeMouseButtonUp(toLocal(e.Button), window.Mouse.GetState());
-            window.OnMouseMoveEvent += e => mouse.InvokeMouseMoved(e.X, e.Y, e.XDelta, e.YDelta, window.Mouse.GetState());
+            _mouse = new MouseDevice();
+            window.OnMouseDownEvent += e => _mouse.InvokeMouseButtonDown(toLocal(e.Button), window.Mouse.GetState());
+            window.OnMouseUpEvent += e => _mouse.InvokeMouseButtonUp(toLocal(e.Button), window.Mouse.GetState());
+            window.OnMouseMoveEvent += e => _mouse.InvokeMouseMoved(e.X, e.Y, e.XDelta, e.YDelta, window.Mouse.GetState());
 
-            var keyboard = new KeyboardDevice();
+
+            _keyboard = new KeyboardDevice();
+            window.OnKeyDownEvent += e => _keyboard.InvokeKeyDown(new KeyDownArgs(toLocal(e.Key)));
+            // TODO time key down durations
+            window.OnKeyUpEvent += e => _keyboard.InvokeKeyReleased(new KeyReleaseArgs(toLocal(e.Key), 0, 0));
+            _keyboard.SetKeyboardState(window.Keyboard.GetState());
 
             window.VSync = VSyncMode.On;
             window.OnLoadEvent += OnLoadAction;
@@ -228,7 +234,7 @@ namespace Render.Core.Implementation
             _g.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             _g.MatrixMode(MatrixMode.Modelview);
             _g.LoadIdentity();
-            _g.Ortho(0, Width, Height, 0, -1, 1);
+            _g.Ortho(-Width / 2, Width / 2, Height / 2, -Height / 2, -1, 1);
             Draw?.Invoke(this);
 
             _window.SwapBuffers();

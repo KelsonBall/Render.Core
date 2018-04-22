@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Render.Core.Vectors;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace KelsonBall.Geometry.Areas
