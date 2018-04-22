@@ -8,4 +8,8 @@
     <ProjectReference Include="..\RenderCore.Game\RenderCore.Game.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Data\" />
+  </ItemGroup>
+
 </Project>

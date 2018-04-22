@@ -17,21 +17,23 @@ namespace KelsonBall.LudumDare41.Scenes.Levels
 
 
         public static Scene GetLevel1(ICanvas canvas)
-            => new BallLevel(level =>
+        {
+            var level = new BallLevel(_ =>
             {
                 canvas.Keyboard.KeyDown += k =>
                 {
-                    level.CastGolfSwing(k.Key, level.Camera.MousePosition);
+                    _.CastGolfSwing(k.Key, _.Camera.MousePosition);
                 };
 
-                level.OnDraw += __ =>
+                _.OnDraw += __ =>
                 canvas.WithStyle(() =>
                     {
-                        canvas.Image(level.map1, -level.Camera.Position);
+                        canvas.Image(_.map1, -_.Camera.Position);
                         //canvas.Fill = Color.Constants.White;
                         //canvas.Ellipse(canvas.MousePosition, (5, 5));
                     });
-                level.Camera = new Camera(MainCamera =>
+
+                _.Camera = new Camera(MainCamera =>
                 {
                     MainCamera.AddBehavior(new Behavior
                     {
@@ -46,8 +48,52 @@ namespace KelsonBall.LudumDare41.Scenes.Levels
 
                         },
                     });
-                })
-                {
+                });
+            });
+
+            level.Add(level.Camera);
+
+            var host = new Physics2DHost(h => { });
+            level.Camera.Add(host);
+            host.Add(new Physics2DObject(r =>
+                        {
+                            r.PhysicsBodyFactory = w =>
+                            {
+                                var body = BodyFactory.CreateRectangle(w, 100, 10, 1, position: new Rektor(-50, 30));
+                                body.CollisionCategories = Category.All & ~Category.Cat1;
+                                body.Restitution = 1;
+                                return body;
+                            };
+                            r.Position += (-50, 30);
+                            r.OnDraw += _ => canvas.Image(level.hazard, (0, 0));
+                        }));
+            host.Add(new Physics2DObject(bob =>
+                    {
+                        Rektor position = (-130, -50);
+                        level.Bob = bob;
+                        bob.PhysicsBodyFactory = w =>
+                        {
+                            var body = BodyFactory.CreateRectangle(w, 30, 9, 0.01f, position: position, bodyType: BodyType.Dynamic);
+                            body.CollisionCategories = Category.All & ~Category.Cat10 & ~Category.Cat1;
+                            body.CollidesWith = Category.All & ~Category.Cat10;
+                            body.Restitution = 1;
+                            return body;
+                        };
+                        bob.Position = position;
+                        double speed = 0;
+                        bob.OnDraw += _ =>
+                            canvas.WithStyle(() =>
+                            {
+                                if (CanUseCooldown(true, level.Timer_GolfSwing, level.Cooldown_GolfSwing))
+                                    canvas.Image(level.BobsCharacter, (0, -20));
+                                else
+                                    canvas.Image(level.BobSwing, (0, -20));
+                            });
+
+                        bob.AddBehavior(BobBehavior.Get(bob, canvas, 50, 0.1f, s => speed = s));
+                    }));
+
+            host.Add(
                     new ScreenObject(powerBar =>
                     {
                         powerBar.OnDraw = _ =>
@@ -69,65 +115,15 @@ namespace KelsonBall.LudumDare41.Scenes.Levels
                                 canvas.Font = level.arialLarge;
                                 //canvas.Text($"p: {Math.Round(power)}", (-30, -24));
                             });
-                    }),
+                    }));
 
-                    new Physics2DHost(host =>
+            host.Add(new Ball(ball =>
                     {
-                    })
-                    {
-                        new Physics2DObject(r =>
-                        {
-                            r.PhysicsBodyFactory = w =>
-                            {
-                                var body = BodyFactory.CreateRectangle(w, 100, 10, 1, position: new Rektor(-50, 30));
-                                body.CollisionCategories = Category.All & ~Category.Cat1;
-                                body.Restitution = 1;
-                                return body;
-                            };
-                            r.Position += (-50, 30);
-                            r.OnDraw += _ => canvas.Image(level.hazard, (0, 0));
-                        }),
-                        new Physics2DObject(bob =>
-                        {
-                            Rektor position = (-130, -50);
-                            level.Bob = bob;
-                            bob.PhysicsBodyFactory = w =>
-                            {
-                                var body = BodyFactory.CreateRectangle(w, 30, 9, 0.01f, position: position, bodyType: BodyType.Dynamic);
-                                body.CollisionCategories = Category.All & ~Category.Cat10 & ~Category.Cat1;
-                                body.CollidesWith = Category.All & ~Category.Cat10;
-                                body.Restitution = 1;
-                                return body;
-                            };
-                            bob.Position = position;
-                            double speed = 0;
-                            bob.OnDraw += _ =>
-                                canvas.WithStyle(() =>
-                                {
-                                    //canvas.Fill = Color.Constants.Crimson;
-                                    //canvas.Rectangle((0, 0), (30, 9));
-                                    if (CanUseCooldown(true, level.Timer_GolfSwing, level.Cooldown_GolfSwing))
-                                        canvas.Image(level.BobsCharacter, (0, -20));
-                                    else
-                                        canvas.Image(level.BobSwing, (0, -20));
-                                    //canvas.Fill = Color.Constants.Brown;
-                                    //canvas.Ellipse((0, 0), (10, 10));
-                                    //canvas.Fill = Color.Constants.Crimson;
-                                    //canvas.Triangle((-5, 5), (-5, -5), (7, 0));
-                                    //canvas.Font = level.arialLarge;
-                                    //canvas.Text($"v: {(int)Math.Round(speed)}", (-10, -30));
-                                });
-
-                            bob.AddBehavior(BobBehavior.Get(bob, canvas, 50, 0.1f, s => speed = s));
-                        }),
-                        new Ball(ball =>
-                        {
-                            ball.Position = (-110, -57);
-                            level.GolfBall = ball;
-                        }),
-                    }
-                };
-            });
+                        ball.Position = (-110, -57);
+                        level.GolfBall = ball;
+                    }));
+            return level;
+        }
     }
 }
 

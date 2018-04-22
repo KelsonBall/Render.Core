@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:KelsonBall.LudumDare41.LevelEditor"
+             xmlns:utils="clr-namespace:KelsonBall.LudumDare41.LevelEditor.Utils"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <utils:xToLeftConverter x:Key="xToLeftConverter" />
+        <utils:yToTopConverter x:Key="yToTopConverter" />
     </Application.Resources>
 </Application>

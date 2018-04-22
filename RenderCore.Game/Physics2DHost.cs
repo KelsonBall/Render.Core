@@ -25,8 +25,6 @@ namespace RenderCore.Game
         {
             if (child is Physics2DObject item)
                 physicsMap.Add((item.GetPhysicsBody(Host), item));
-            else
-                throw a.fit();
             base.Add(child);
         }
 

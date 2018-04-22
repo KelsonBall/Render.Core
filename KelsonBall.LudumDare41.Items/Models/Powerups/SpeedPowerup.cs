@@ -1,7 +1,7 @@
 ﻿namespace KelsonBall.LudumDare41.Items.Models
 {
-    public class SpeedPowerup
+    public class SpeedPowerup : GameItemModel
     {
-        public Point Location { get; set; }
+        public double X { get; set; } public double Y { get; set; }
     }
 }

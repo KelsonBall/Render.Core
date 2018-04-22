@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using KelsonBall.LudumDare41.LevelEditor.Events;
+using PubSub;
+using System;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace KelsonBall.LudumDare41.LevelEditor
 {
@@ -7,9 +12,23 @@ namespace KelsonBall.LudumDare41.LevelEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel ViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = (ViewModel = new MainWindowViewModel());
+            this.Subscribe<MapImagePickedEvent>(args =>
+            {
+                ImageBrush image = new ImageBrush();
+                image.ImageSource = new BitmapImage(new Uri(args.Uri));
+                CanvasItemsControl.Background = image;
+            });
+        }
+
+        private void MapCanvas_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Console.WriteLine(e.GetPosition(CanvasItemsControl));
         }
     }
 }

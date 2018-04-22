@@ -21,7 +21,7 @@ namespace KelsonBall.LudumDare41.Items
             {
                 var body = BodyFactory.CreateCircle(w, 4, 0.1f, position: Position, bodyType: BodyType.Dynamic);
                 body.CollisionCategories = Category.Cat10;
-                body.LinearDamping = 0.1f;
+                body.LinearDamping = 0.8f;
                 body.Restitution = 1;
                 return body;
             };
@@ -34,23 +34,26 @@ namespace KelsonBall.LudumDare41.Items
         public double MaxPower = 1000;
         public double MinPower = 50;
         public double PowerRadius = 80;
-
+        public bool IsAirborne => TimeSinceHit.ElapsedMilliseconds < AirDuration;
+        public double Height => AirDuration.ScaledAlong(end: 2150) * Math.Sin(((double)(TimeSinceHit.ElapsedMilliseconds)).ScaledAlong(end: AirDuration) * Math.PI);
         public double Power(Rektor mouse) => Math.Max(Math.Min(Aim(mouse).Magnitude().ScaledAlong(end: PowerRadius) * MaxPower, MaxPower), MinPower);
 
         Queue<Rektor> punchQueue = new Queue<Rektor>();
         public void Launch(Rektor direction, double power)
         {
             TimeSinceHit.Restart();
-            AirDuration = power.ScaledAlong(end: MaxPower) * 1000;
+            AirDuration = Math.Pow(power.ScaledAlong(end: MaxPower) * 600, 1.2);
             for (int i = 0; i < 10; i++)
                 punchQueue.Enqueue(direction * power);
         }
+
+        private Color BallColor = Color.Constants.White;
 
         private void DrawBall(ICanvas canvas)
         {
             canvas.WithStyle(() =>
             {
-                canvas.Fill = Color.Constants.White;
+                canvas.Fill = BallColor;
                 canvas.Ellipse((0, 0), (4, 4));
             });
         }
@@ -59,21 +62,33 @@ namespace KelsonBall.LudumDare41.Items
         {
             if (punchQueue.Count > 0)
                 Body.ApplyLinearImpulse(punchQueue.Dequeue());
-            if (TimeSinceHit.ElapsedMilliseconds < AirDuration)
+            if (IsAirborne)
             {
-                var s = Math.Sin(((double)(TimeSinceHit.ElapsedMilliseconds)).ScaledAlong(end: AirDuration) * Math.PI);
-                if (s > 0.3)
+                BallColor = new Color((byte)(0xFF * Height), (byte)(0xFF * Height), (byte)(0xFF * Height), 0xFF);
+                if (Height > 0.3)
                     Body.CollidesWith = Category.Cat1; // tall bois only
                 else
                     Body.CollidesWith = Category.All;
-                Scale = (1 + s, 1 + s);
+                Scale = (1 + Height, 1 + Height);
                 Body.LinearDamping = 0.0f;
             }
             else
             {
                 Scale = (1, 1);
-                Body.LinearDamping = 0.2f;
+                if (Body.LinearDamping < 0.8f)
+                {
+                    Body.LinearDamping += 0.005f;
+                    BallColor = Color.Constants.CornflowerBlue;
+                }
+                else
+                {
+                    Body.AngularVelocity = 0;
+                    if (Body.LinearVelocity.Length() > 1)
+                        Body.ApplyForce(-Body.LinearVelocity * 100);
+                    BallColor = Color.Constants.White;
+                }
             }
+
             base.Update(time);
         }
     }

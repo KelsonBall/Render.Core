@@ -6,7 +6,575 @@
         xmlns:local="clr-namespace:KelsonBall.LudumDare41.LevelEditor"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:AnimationViewModel}">
+            <StackPanel>
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>SpriteSheet</Label>
+                <TextBox Text="{Binding SpriteSheet}" />
+
+                <Label>Width</Label>
+                <TextBox Text="{Binding Width, StringFormat=N}" />
+
+                <Label>Height</Label>
+                <TextBox Text="{Binding Height, StringFormat=N}" />
+
+                <Label>Padding</Label>
+                <TextBox Text="{Binding Padding, StringFormat=N}" />
+
+                <Label>FrameDuration</Label>
+                <TextBox Text="{Binding FrameDuration, StringFormat=N}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:BallSpawnViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CutsceneViewModel}">
+            <StackPanel>
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Animations</Label>
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PointViewModel}">
+            <StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y, StringFormat=N}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:GolfHoleViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Radius</Label>
+                <TextBox Text="{Binding Radius, StringFormat=N}" />
+
+                <Label>Gravity</Label>
+                <TextBox Text="{Binding Gravity, StringFormat=N}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:LaserHazardViewModel}">
+            <StackPanel>
+                <Label>A</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>B</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Event</Label>
+                <TextBox Text="{Binding Event}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:MotionDetectorHazardViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Radius</Label>
+                <TextBox Text="{Binding Radius, StringFormat=N}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:SandHazardViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Radius</Label>
+                <TextBox Text="{Binding Radius, StringFormat=N}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:WaterHazardViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Radius</Label>
+                <TextBox Text="{Binding Radius, StringFormat=N}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:GaurdViewModel}">
+            <StackPanel>
+                <Label>Start</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>VisionLength</Label>
+                <TextBox Text="{Binding VisionLength, StringFormat=N}" />
+
+                <Label>VisionArc</Label>
+                <TextBox Text="{Binding VisionArc, StringFormat=N}" />
+
+                <Label>ReactionTime</Label>
+                <TextBox Text="{Binding ReactionTime, StringFormat=N}" />
+
+                <Label>Path</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:MobPathViewModel}">
+            <StackPanel>
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:DashPadViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Rotation</Label>
+                <TextBox Text="{Binding Rotation, StringFormat=N}" />
+
+                <Label>Strength</Label>
+                <TextBox Text="{Binding Strength, StringFormat=N}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TeleporterViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Rotation</Label>
+                <TextBox Text="{Binding Rotation, StringFormat=N}" />
+
+                <Label>TeleporterId</Label>
+                <TextBox Text="{Binding TeleporterId, StringFormat=N}" />
+
+                <Label>CooldownMs</Label>
+                <TextBox Text="{Binding CooldownMs, StringFormat=N}" />
+
+                <Label>Event</Label>
+                <TextBox Text="{Binding Event}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PlayerSpawnViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PowerPowerupViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:SpeedPowerupViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:StealthPowerupViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CircleTerrainViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Radius</Label>
+                <TextBox Text="{Binding Radius, StringFormat=N}" />
+
+                <Label>Image</Label>
+                <TextBox Text="{Binding Image}" />
+
+                <Label>Bounce</Label>
+                <TextBox Text="{Binding Bounce, StringFormat=N}" />
+
+                <Label>SoundLevel</Label>
+                <TextBox Text="{Binding SoundLevel, StringFormat=N}" />
+
+                <Label>Event</Label>
+                <TextBox Text="{Binding Event}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:RectangleTerrainViewModel}">
+            <StackPanel>
+                <Label>Location</Label>
+                <StackPanel Margin="8,2,2,2">
+                    <Label>X</Label>
+                    <TextBox Text="{Binding X}" />
+                    <Label>Y</Label>
+                    <TextBox Text="{Binding Y}" />
+                </StackPanel>
+
+                <Label>Width</Label>
+                <TextBox Text="{Binding Width, StringFormat=N}" />
+
+                <Label>Height</Label>
+                <TextBox Text="{Binding Height, StringFormat=N}" />
+
+                <Label>Rotation</Label>
+                <TextBox Text="{Binding Rotation, StringFormat=N}" />
+
+                <Label>Image</Label>
+                <TextBox Text="{Binding Image}" />
+
+                <Label>Bounce</Label>
+                <TextBox Text="{Binding Bounce, StringFormat=N}" />
+
+                <Label>SoundLevel</Label>
+                <TextBox Text="{Binding SoundLevel, StringFormat=N}" />
+
+                <Label>Event</Label>
+                <TextBox Text="{Binding Event}" />
+
+                <Label>Name</Label>
+                <TextBox Text="{Binding Name}" />
+
+                <Label>Tags</Label>
+                <TextBox Text="{Binding Tags}" />
+
+                <Label>CollisionGroups</Label>
+                <TextBox Text="{Binding CollisionGroups}" />
+
+
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" >
+            <Button Command="{Binding OpenCommand}">Open</Button>
+            <Button Command="{Binding SaveCommand}">Save</Button>
+        </StackPanel>
+        <ComboBox ItemsSource="{Binding ItemNames}" Text="{Binding SelectedItemNameToAdd}" Grid.Row="1"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding LevelItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid DataContext="{Binding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Name}" Grid.Column="0"/>
+                            <Button Command="{Binding SelectItemCommand}" Grid.Column="1">Select</Button>
+                            <Button Command="{Binding DeleteItemCommand}" Grid.Column="2">X</Button>
+                            <Expander Header="Properties" Grid.Row="1" Grid.ColumnSpan="3" IsExpanded="False">
+                                <ContentPresenter Content="{Binding}" />
+                            </Expander>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+            <ItemsControl ItemsSource="{Binding LevelItems}" x:Name="CanvasItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas x:Name="MapCanvas" Width="{Binding MapWidth}" Height="{Binding MapHeight}" PreviewMouseDown="MapCanvas_PreviewMouseDown"></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding Path=X, Converter={StaticResource xToLeftConverter}}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource yToTopConverter}}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding SelectItemCommand}"  DataContext="{Binding}" ToolTip="{Binding Name}">
+                            <Ellipse Fill="Red" Stroke="Black" Height="5" Width="5" />
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Window>

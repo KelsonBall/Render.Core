@@ -2,11 +2,20 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Graphics;
 using Render.Core.Vectors;
+using System.Collections.Generic;
 
 namespace Render.Core.Textures
 {
     public class Texture
     {
+        protected static readonly List<uint> _handles = new List<uint>();
+
+        public static void DeleteAll()
+        {
+            foreach (var handle in _handles)
+                GL.DeleteTexture(handle);
+        }
+
         private readonly RGBA[,] _source;
         public readonly uint Handle;
         public readonly int Width;
@@ -38,6 +47,7 @@ namespace Render.Core.Textures
             });
 
             GL.BindTexture(TextureTarget.Texture2D, 0);
+            _handles.Add(Handle);
         }
 
         public static implicit operator uint (Texture image) => image.Handle;

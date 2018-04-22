@@ -1,6 +1,7 @@
 ﻿using KelsonBall.LudumDare41.Assets;
 using KelsonBall.LudumDare41.Scenes.Levels;
 using Render.Core;
+using Render.Core.Textures;
 using RenderCore.Game;
 using System;
 
@@ -20,6 +21,7 @@ namespace KelsonBall.LudumDare41.Game
 
                 canvas.Show();
             }
+            Texture.DeleteAll();
         }
     }
 }

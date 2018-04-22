@@ -1,7 +1,7 @@
 ﻿namespace KelsonBall.LudumDare41.Items.Models
 {
-    public class PlayerSpawn
+    public class PlayerSpawn : GameItemModel
     {
-        public Point Location { get; set; }
+        public double X { get; set; } public double Y { get; set; }
     }
 }

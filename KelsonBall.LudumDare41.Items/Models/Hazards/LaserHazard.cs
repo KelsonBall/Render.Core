@@ -1,9 +1,13 @@
 ﻿namespace KelsonBall.LudumDare41.Items.Models
 {
-    public class LaserHazard
+    public class LaserHazard : GameItemModel
     {
-        public Point A { get; set; }
-        public Point B { get; set; }
+        public double XA { get; set; }
+        public double YA { get; set; }
+
+        public double XB { get; set; }
+        public double YB { get; set; }
+
         public string Event { get; set; }
     }
 }

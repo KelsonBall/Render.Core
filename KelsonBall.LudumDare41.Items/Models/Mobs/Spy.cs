@@ -1,8 +1,9 @@
 ﻿namespace KelsonBall.LudumDare41.Items.Models.Mobs
 {
-    public class Spy
+    public class Spy : GameItemModel
     {
-        public Point Start { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
         public MobPath Path { get; set; }
     }
 }
