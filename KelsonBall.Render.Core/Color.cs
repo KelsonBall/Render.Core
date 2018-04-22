@@ -50,6 +50,11 @@ namespace Render.Core
             }
         }
 
+        public Color(byte r, byte g, byte b, byte a)
+        {
+            _color = new Color4(r, g, b, a);
+        }
+
         public byte A => (_color.ToArgb().GetByte(3));
         public double Alpha => _color.A;
         public byte R => (_color.ToArgb().GetByte(2));

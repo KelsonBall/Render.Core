@@ -5,9 +5,9 @@ using static System.Math;
 namespace Render.Core.Transforms
 {
 
-    public class Transform2 : Transform<rVector>
+    public class Transform2 : Transform<Rektor>
     {
-        public static TransformStack<rVector> NewTransformStack() => new TransformStack<rVector>(new Transform2());
+        public static TransformStack<Rektor> NewTransformStack() => new TransformStack<Rektor>(new Transform2());
 
         private Transform2() : base(3)
         {
@@ -19,16 +19,16 @@ namespace Render.Core.Transforms
 
         }
 
-        public override rVector ApplyTo(rVector v)
+        public override Rektor ApplyTo(Rektor v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 1);
-            return ((rVector3)(transform * affineVector)).ToVector();
+            return ((Rektor3)(transform * affineVector)).ToVector();
         }
 
-        public override rVector ApplyInverse(rVector v)
+        public override Rektor ApplyInverse(Rektor v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 1);
-            return ((rVector3)(inverse * affineVector)).ToVector();
+            return ((Rektor3)(inverse * affineVector)).ToVector();
         }
 
         internal static Transform2 Translation(double x, double y)
@@ -66,25 +66,25 @@ namespace Render.Core.Transforms
 
     public static class Transform2StackOperations
     {
-        public static TransformStack<rVector> Translate(TransformStack<rVector> stack, rVector v)
+        public static TransformStack<Rektor> Translate(TransformStack<Rektor> stack, Rektor v)
         {
             stack.Push(Transform2.Translation(v.X, v.Y));
             return stack;
         }
 
-        public static TransformStack<rVector> Rotate(TransformStack<rVector> stack, double angle)
+        public static TransformStack<Rektor> Rotate(TransformStack<Rektor> stack, double angle)
         {
             stack.Push(Transform2.Rotation(angle));
             return stack;
         }
 
-        public static TransformStack<rVector> Scale(TransformStack<rVector> stack, double s)
+        public static TransformStack<Rektor> Scale(TransformStack<Rektor> stack, double s)
         {
             stack.Push(Transform2.Scale(s));
             return stack;
         }
 
-        public static TransformStack<rVector> Scale(TransformStack<rVector> stack, rVector v)
+        public static TransformStack<Rektor> Scale(TransformStack<Rektor> stack, Rektor v)
         {
             stack.Push(Transform2.Scale(v.X, v.Y));
             return stack;

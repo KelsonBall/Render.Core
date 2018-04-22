@@ -15,7 +15,7 @@ namespace RenderCore.Game
 
         public Physics2DHost(Action<Physics2DHost> configure) : base(o =>
         {
-            ((Physics2DHost)o).Host = new World(new rVector(0, 0));
+            ((Physics2DHost)o).Host = new World(new Rektor(0, 0));
             configure((Physics2DHost)o);
         })
         {
@@ -35,8 +35,8 @@ namespace RenderCore.Game
             Host.Step((float)time.TotalSeconds);
             foreach (var item in physicsMap)
             {
-                item.gameObject.Transform.Translation = item.body.Position;
-                item.gameObject.Transform.Rotation = item.body.Rotation;
+                item.gameObject.Position = item.body.Position;
+                item.gameObject.Rotation = item.body.Rotation;
             }
             base.Update(time);
         }

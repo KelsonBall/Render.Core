@@ -6,13 +6,13 @@ namespace Render.Core.Transforms
     /// <summary>
     /// A transform implementation providing full 4x4 afine transformation matricies for 2D transforms in the X-Z plane
     /// </summary>
-    public class OrthoFrame : Transform<rVector3>
+    public class OrthoFrame : Transform<Rektor3>
     {
         public static OrthoFrame Unit =>
             new OrthoFrame
             {
-                Scale = rVector.one,
-                Translation = rVector.O,
+                Scale = Rektor.one,
+                Translation = Rektor.O,
                 Rotation = 0
             };
 
@@ -36,18 +36,18 @@ namespace Render.Core.Transforms
             Matrix = stack.Aggregate.Matrix;
         }
 
-        public rVector Forward => ApplyTo(rVector.î) - Position;
-        public rVector Left => ApplyTo(rVector.ĵ) - Position;
+        public Rektor Forward => ApplyTo(Rektor.î) - Position;
+        public Rektor Left => ApplyTo(Rektor.ĵ) - Position;
 
-        private Transform<rVector3> scaleTransform = Transform3.Scale(1);
-        private rVector3 scale;
-        public rVector Scale
+        private Transform<Rektor3> scaleTransform = Transform3.Scale(1);
+        private Rektor3 scale;
+        public Rektor Scale
         {
             get => scale.ToVector();
             set
             {
                 scale = value.ToVector3();
-                scaleTransform = Transform3.Scale(new rVector3(value.X, value.Y, 1));
+                scaleTransform = Transform3.Scale(new Rektor3(value.X, value.Y, 1));
                 Calculate();
             }
         }
@@ -60,25 +60,25 @@ namespace Render.Core.Transforms
 
         public OrthoFrame ScaleBy(double x, double y)
         {
-            return ScaleBy(new rVector((float)x, (float)y));
+            return ScaleBy(new Rektor((float)x, (float)y));
         }
 
-        public OrthoFrame ScaleBy(rVector s)
+        public OrthoFrame ScaleBy(Rektor s)
         {
-            Scale = new rVector3(Scale.X * s.X, 1, Scale.Y * s.Y).ToVector();
+            Scale = new Rektor3(Scale.X * s.X, 1, Scale.Y * s.Y).ToVector();
             return this;
         }
 
-        private Transform<rVector3> rotationTransform = Transform3.Rotation(0, 1, 0, 0);
-        private rVector3 rotation;
+        private Transform<Rektor3> rotationTransform = Transform3.Rotation(0, 1, 0, 0);
+        private Rektor3 rotation;
         public double Rotation
         {
             get => rotation.Y;
             set
             {
-                rotation = new rVector3(0, value, 0);
+                rotation = new Rektor3(0, value, 0);
                 var stack = Transform3.NewTransformStack();
-                stack.Push(Transform3.Rotation(value, rVector3.k̂));
+                stack.Push(Transform3.Rotation(value, Rektor3.k̂));
                 rotationTransform = stack.Aggregate;
                 Calculate();
             }
@@ -90,9 +90,9 @@ namespace Render.Core.Transforms
             return this;
         }
 
-        private Transform<rVector3> translationTransform = Transform3.Translation(0, 0, 0);
-        private rVector3 translation;
-        public rVector Translation
+        private Transform<Rektor3> translationTransform = Transform3.Translation(0, 0, 0);
+        private Rektor3 translation;
+        public Rektor Translation
         {
             get => translation.ToVector();
             set
@@ -103,7 +103,7 @@ namespace Render.Core.Transforms
             }
         }
 
-        public OrthoFrame TranslateBy(rVector translation)
+        public OrthoFrame TranslateBy(Rektor translation)
         {
             Translation += translation;
             return this;
@@ -111,31 +111,31 @@ namespace Render.Core.Transforms
 
         public OrthoFrame TranslateBy(double x, double y)
         {
-            return TranslateBy(new rVector(x, y));
+            return TranslateBy(new Rektor(x, y));
         }
 
-        public rVector Position => ApplyTo(rVector.O);
+        public Rektor Position => ApplyTo(Rektor.O);
 
 
-        public rVector ApplyTo(rVector v)
+        public Rektor ApplyTo(Rektor v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 0, 1);
             return ((transform * affineVector).ToRVector3()).ToVector();
         }
 
-        public rVector ApplyInverse(rVector v)
+        public Rektor ApplyInverse(Rektor v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, 0, 1);
             return (Inverse * affineVector).ToRVector3().ToVector();
         }
 
-        public override rVector3 ApplyTo(rVector3 v)
+        public override Rektor3 ApplyTo(Rektor3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
             return (transform * affineVector).ToRVector3();
         }
 
-        public override rVector3 ApplyInverse(rVector3 v)
+        public override Rektor3 ApplyInverse(Rektor3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
             return (Inverse * affineVector).ToRVector3();

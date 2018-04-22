@@ -1,4 +1,4 @@
-﻿using KelsonBall.Render.Core.Textures;
+﻿using Render.Core.Textures;
 using Render.Core.Extensions;
 
 namespace KelsonBall.Render.Core.Extensions

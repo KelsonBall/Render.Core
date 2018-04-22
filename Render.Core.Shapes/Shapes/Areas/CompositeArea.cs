@@ -1,6 +1,5 @@
 ﻿using Render.Core.Vectors;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace KelsonBall.Geometry.Areas
 {
@@ -38,7 +37,7 @@ namespace KelsonBall.Geometry.Areas
             return this;
         }
 
-        public override bool Contains(rVector point)
+        public override bool Contains(Rektor point)
         {
             bool result = Root.Contains(point);
             foreach (var operation in Operations)

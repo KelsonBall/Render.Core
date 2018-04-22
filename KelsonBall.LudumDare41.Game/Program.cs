@@ -1,18 +1,22 @@
-﻿using KelsonBall.LudumDare41.Scenes;
+﻿using KelsonBall.LudumDare41.Assets;
+using KelsonBall.LudumDare41.Scenes.Levels;
 using Render.Core;
 using RenderCore.Game;
+using System;
 
 namespace KelsonBall.LudumDare41.Game
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            using (var canvas = Window.New(800, 680))
+            ResourceManager.RegisterResourceAssembly("Assets", "KelsonBall.LudumDare41.Assets", Art.Assembly);
+            using (var canvas = Window.New(800, 600))
             {
                 var scenes = new SceneManager(canvas);
-                scenes.AddSceneFactory("Main", () => SceneFactory.Demo(canvas));
-                scenes.OpenScene("Main");
+                scenes.AddSceneFactory("Ball", () => BallLevel.GetLevel1(canvas));
+                scenes.OpenScene("Ball");
 
                 canvas.Show();
             }

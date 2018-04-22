@@ -1,4 +1,4 @@
-﻿namespace KelsonBall.Render.Core.Textures
+﻿namespace Render.Core.Textures
 {
     public struct RGBA
     {

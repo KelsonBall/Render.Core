@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KelsonBall.LudumDare41.Items\KelsonBall.LudumDare41.Items.csproj" />
     <ProjectReference Include="..\RenderCore.Game\RenderCore.Game.csproj" />
   </ItemGroup>
 

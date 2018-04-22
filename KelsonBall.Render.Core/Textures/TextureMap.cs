@@ -4,10 +4,10 @@ namespace Render.Core.Textures
 {
     public class TextureMap
     {
-        public readonly rImage Texture;
-        public readonly rVector3[] UvVerticies;
+        public readonly Texture Texture;
+        public readonly Rektor3[] UvVerticies;
 
-        public TextureMap(rImage texture, rVector3[] uvVerticies)
+        public TextureMap(Texture texture, Rektor3[] uvVerticies)
         {
             Texture = texture;
             UvVerticies = uvVerticies;

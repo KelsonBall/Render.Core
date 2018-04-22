@@ -46,8 +46,8 @@ namespace Render.Core.Implementation
 
         private Stack<Style> _styleStack = new Stack<Style>();
         //private Stack<Transform> _transformStack = new Stack<Transform>();
-        private (rVector offset, rVector size) _baseViewport = (rVector.O, rVector.O);
-        private Stack<(rVector offset, rVector size)> _boundryStack = new Stack<(rVector, rVector)>();
+        private (Rektor offset, Rektor size) _baseViewport = (Rektor.O, Rektor.O);
+        private Stack<(Rektor offset, Rektor size)> _boundryStack = new Stack<(Rektor, Rektor)>();
 
         public Font Font { get => _styleStack.Peek().Font; set => _styleStack.Peek().Font = value; }
         public Color Fill { get => _styleStack.Peek().Fill; set => _styleStack.Peek().Fill = value; }
@@ -60,7 +60,8 @@ namespace Render.Core.Implementation
         public event Action<double> Step;
         public event Action<ICanvas> Draw;
 
-        public rVector MousePosition { get => (Mouse.X, Mouse.Y); }
+        public Rektor ScreenCenter { get => (Width / 2, Height / 2); }
+        public Rektor MousePosition { get => (Mouse.X, Mouse.Y) - ScreenCenter; }
 
         public void PushStyle()
         {
@@ -91,20 +92,20 @@ namespace Render.Core.Implementation
             PopStyle();
         }
 
-        public void PushBoundry(rVector offset, rVector size)
+        public void PushBoundry(Rektor offset, Rektor size)
         {
             _boundryStack.Push((offset, size));
             ApplyBoundry();
         }
 
-        public (rVector offset, rVector size) PopBoundry()
+        public (Rektor offset, Rektor size) PopBoundry()
         {
             var result = _boundryStack.Pop();
             ApplyBoundry();
             return result;
         }
 
-        public void WithBoundry(rVector offset, rVector size, Action action)
+        public void WithBoundry(Rektor offset, Rektor size, Action action)
         {
             PushBoundry(offset, size);
             action();
@@ -120,7 +121,7 @@ namespace Render.Core.Implementation
             else
             {
                 _g.Enable(EnableCap.ScissorTest);
-                var offset = _boundryStack.Select(b => b.offset).Aggregate(rVector.O, (acc, off) => acc + off);
+                var offset = _boundryStack.Select(b => b.offset).Aggregate(Rektor.O, (acc, off) => acc + off);
                 var size = _boundryStack.Peek().size;
                 foreach (var boundry in _boundryStack.Reverse())
                     _g.Scissor((int)offset.X, Height - (int)offset.Y - (int)size.Y, (int)size.X, (int)size.Y);
@@ -200,7 +201,7 @@ namespace Render.Core.Implementation
         {
             _g.Viewport(_window.ClientRectangle.X, _window.ClientRectangle.Y, _window.ClientRectangle.Width, _window.ClientRectangle.Height);
 
-            _g.ClearColor(Color.Constants.CornflowerBlue);
+            _g.ClearColor(Color.Constants.Black);
             _g.Enable(EnableCap.Blend);
             _g.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
@@ -245,30 +246,31 @@ namespace Render.Core.Implementation
             _g.ClearColor(color);
         }
 
-        public void Triangle(rVector a, rVector b, rVector c)
+        public void Triangle(Rektor a, Rektor b, Rektor c)
         {
             Shape((0, 0), a, b, c);
         }
 
-        public void Rectangle(rVector position, rVector size)
+        public void Rectangle(Rektor position, Rektor size)
         {
+            position -= size / 2;
             Quad(position,
                  position + (size.X, 0),
                  position + size,
                  position + (0, size.Y));
         }
 
-        public void Quad(rVector a, rVector b, rVector c, rVector d)
+        public void Quad(Rektor a, Rektor b, Rektor c, Rektor d)
         {
             Shape((0, 0), a, b, c, d);
         }
 
-        public void Ellipse(rVector position, rVector size)
+        public void Ellipse(Rektor position, Rektor size)
         {
-            Shape(position, 0d.Lerp(Tau, count: size.Magnitude()).Select(t => new rVector(size.X * Cos(t), size.Y * Sin(t))).ToArray());
+            Shape(position, 0d.Lerp(Tau, count: size.Magnitude()).Select(t => new Rektor(size.X * Cos(t), size.Y * Sin(t))).ToArray());
         }
 
-        public void Line(rVector a, rVector b)
+        public void Line(Rektor a, Rektor b)
         {
             if (StrokeWeight <= 0)
                 return;
@@ -285,14 +287,15 @@ namespace Render.Core.Implementation
             });
         }
 
-        public void Image(rImage image, rVector position)
+        public void Image(Texture image, Rektor position)
         {
             WithOrtho(() =>
             {
                 _g.Color4(Color4.White);
-                _g.Translate(position.ToVector3());
+                _g.Translate((position - image.Size / 2).ToVector3());
                 _g.Disable(EnableCap.Lighting);
                 _g.Enable(EnableCap.Texture2D);
+                _g.Enable(EnableCap.Blend);
 
                 WithTexture(image, () =>
                 {
@@ -311,9 +314,9 @@ namespace Render.Core.Implementation
             });
         }
 
-        public TextRenderResult Text(string text, rVector position) => new TextRenderResult(RenderText(text, position));
+        public TextRenderResult Text(string text, Rektor position) => new TextRenderResult(RenderText(text, position));
 
-        private IEnumerable<CharacterRenderResult> RenderText(string text, rVector position)
+        private IEnumerable<CharacterRenderResult> RenderText(string text, Rektor position)
         {
             var characters = text.Select(c => (c, Font[c, Fill]))
                                  .Select(t => (letter: t.Item1, texture: t.Item2.texture, yshift: t.Item2.yshift));
@@ -333,12 +336,12 @@ namespace Render.Core.Implementation
 
         private static IconCache icons;
 
-        public void Icon(FontAwesomeIcons icon, float size, rVector position)
+        public void Icon(FontAwesomeIcons icon, float size, Rektor position)
         {
             Image(icons[icon, size, Fill], position);
         }
 
-        public void Shape(rVector position, params rVector[] points)
+        public void Shape(Rektor position, params Rektor[] points)
         {
             var scaled = points.Indecies(i =>
             {
@@ -381,7 +384,7 @@ namespace Render.Core.Implementation
             _g.PushMatrix();
             {
                 if (_boundryStack.Count > 0)
-                    _g.Translate(_boundryStack.Select(b => b.offset).Aggregate(rVector.O, (acc, off) => acc + off).ToVector3());
+                    _g.Translate(_boundryStack.Select(b => b.offset).Aggregate(Rektor.O, (acc, off) => acc + off).ToVector3());
                 action();
             }
             _g.PopMatrix();
@@ -407,7 +410,7 @@ namespace Render.Core.Implementation
             _g.MultMatrix(matrix.AsColumnMajorArray());
         }
 
-        private void WithTexture(rImage image, Action action)
+        private void WithTexture(Texture image, Action action)
         {
             _g.BindTexture(TextureTarget.Texture2D, image);
             {

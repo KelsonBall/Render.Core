@@ -1,7 +1,7 @@
-﻿using System;
+﻿using KelsonBall.Render.Core.Extensions;
 using System.Runtime.InteropServices;
 
-namespace KelsonBall.Render.Core.Textures
+namespace Render.Core.Textures
 {
 
     public class Bitmap
@@ -48,31 +48,22 @@ namespace KelsonBall.Render.Core.Textures
 
 
 
-        T MarshalToStruct<T>(byte[] data, int start = 0, int? length = null) where T : struct
-        {
-            length = length ?? data.Length;
-            IntPtr dataPt = Marshal.AllocHGlobal(data.Length);
-            Marshal.Copy(data, start, dataPt, length.Value);
-            var castStruct = Marshal.PtrToStructure<T>(dataPt);
-            Marshal.FreeHGlobal(dataPt);
-            return castStruct;
-        }
+
 
         public Bitmap(byte[] fileData)
         {
-            FileData = MarshalToStruct<FileHeader>(fileData, length: 14);
-            ImageData = MarshalToStruct<ImageHeader>(fileData, start: 14, length: 44);
-            Pixels = new RGBA[ImageData.Width, ImageData.Height];
+            FileData = fileData.MarshalToStruct<FileHeader>(length: 14);
+            ImageData = fileData.MarshalToStruct<ImageHeader>(start: 14, length: 44);
+            int width = (int)ImageData.Width;
+            int height = (int)ImageData.Height;
+            Pixels = new RGBA[width, height];
             int offset = (int)FileData.FileOffsetToPixelArray;
-            int iHeight = 0;
-            for (int i = 0; i < ImageData.Width * ImageData.Height * 3; i += 3)
+            for (int i = 0; i < width * height * 3; i += 3)
             {
-                byte b = fileData[i + offset + 2];
-                byte r = fileData[i + offset + 0];
-                byte g = fileData[i + offset + 1];
-                if ((i / 3) % ImageData.Width == 0 && i > 0)
-                    iHeight++;
-                Pixels[(i / 3) % ImageData.Width, iHeight] = new RGBA(r, g, b, 0xFF);
+                byte r = fileData[i + offset + 2];
+                byte g = fileData[i + offset + 0];
+                byte b = fileData[i + offset + 1];
+                Pixels[(i / 3) % width, height - 1 -(i / 3) / width] = new RGBA(r, g, b, 0xFF);
             }
         }
     }

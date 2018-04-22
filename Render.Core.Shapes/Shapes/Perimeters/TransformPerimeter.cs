@@ -1,13 +1,12 @@
 ﻿using Render.Core.Vectors;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace KelsonBall.Geometry.Shapes.Perimeters
 {
     public class TransformPerimeter : Perimeter
     {
-        public override IEnumerable<rVector> Intersections(Ray<rVector> ray)
+        public override IEnumerable<Rektor> Intersections(Ray<Rektor> ray)
         {
             throw new NotImplementedException();
         }

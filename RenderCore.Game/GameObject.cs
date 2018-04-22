@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace RenderCore.Game
 {
-    public abstract class GameObject : IEnumerable<GameObject>
+    public class GameObject : IEnumerable<GameObject>
     {
         #region Properties
         public string Name;
@@ -26,7 +26,7 @@ namespace RenderCore.Game
         public EventBus Events { get; internal set; } = new EventHome().NewBus();
 
         protected GameObject _root;
-        public GameObject Scene => _root;
+        public Scene Scene => _root as Scene;
 
         private GameObject _parent;
         public GameObject Parent
@@ -64,6 +64,12 @@ namespace RenderCore.Game
                 child.Parent._children.Remove(child);
             child.Parent = this;
             _children.Add(child);
+            if (this is Scene scene)
+            {
+                _root = scene;
+                foreach (var desc in Descendents)
+                    desc._root = scene;
+            }
             foreach (var behavior in child.Behaviors)
                 behavior.Load?.Invoke();
         }

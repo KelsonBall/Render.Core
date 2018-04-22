@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace KelsonBall.Geometry.Shapes
 {
-    public abstract class Shape : IBorder<rVector>, IRegion<rVector>, IComposable<Shape>, ITransformable<Shape, rVector>
+    public abstract class Shape : IBorder<Rektor>, IRegion<Rektor>, IComposable<Shape>, ITransformable<Shape, Rektor>
     {
-        private readonly TransformStack<rVector> transformStack = Transform2.NewTransformStack();
+        private readonly TransformStack<Rektor> transformStack = Transform2.NewTransformStack();
 
         public Area Area { get; private set; }
         public Perimeter Perimeter { get; private set; }
@@ -24,12 +24,12 @@ namespace KelsonBall.Geometry.Shapes
             throw new NotImplementedException();
         }
 
-        public bool Contains(rVector point)
+        public bool Contains(Rektor point)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<rVector> Intersections(Ray<rVector> ray)
+        public IEnumerable<Rektor> Intersections(Ray<Rektor> ray)
         {
             foreach (var intersect in Perimeter.Intersections(ray))
                 if (Area.Contains(intersect))
@@ -46,14 +46,14 @@ namespace KelsonBall.Geometry.Shapes
             throw new NotImplementedException();
         }
 
-        public Shape Transform(Transform<rVector> transform)
+        public Shape Transform(Transform<Rektor> transform)
         {
             Area.Transform(transform);
             Perimeter.Transform(transform);
             return this;
         }
 
-        public rVector[] VertexArray()
+        public Rektor[] VertexArray()
         {
             throw new NotImplementedException();
         }

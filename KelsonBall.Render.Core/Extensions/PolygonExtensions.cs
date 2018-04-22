@@ -11,13 +11,13 @@ namespace Render.Core.Extensions
         /// <summary>
         /// Calculates the center of an arbitrary closed polygon
         /// </summary>
-        public static rVector Centroid(this IEnumerable<rVector> polygon)
+        public static Rektor Centroid(this IEnumerable<Rektor> polygon)
         {
             var points = polygon.ToArray();
             if (points.Length < 3)
                 throw new InvalidOperationException();
 
-            rVector c = rVector.O;
+            Rektor c = Rektor.O;
             for (int i = 0; i < points.Length - 1; i++)
             {
                 double x = (points[i].X + points[i + 1].X) * (points[i].X * points[i + 1].Y - points[i + 1].X * points[i].Y);
@@ -31,7 +31,7 @@ namespace Render.Core.Extensions
         /// <summary>
         /// Calculates the area of an arbitrary closed polygon
         /// </summary>
-        public static double Area(this IEnumerable<rVector> polygon)
+        public static double Area(this IEnumerable<Rektor> polygon)
         {
             var points = polygon.ToArray();
             if (points.Length < 3)

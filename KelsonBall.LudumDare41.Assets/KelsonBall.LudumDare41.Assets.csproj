@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Packed\CharacterIdle.tga" />
+    <None Remove="Packed\CharacterSwing.tga" />
+    <None Remove="Packed\Data.bmp" />
+    <None Remove="Packed\ExampleMap.bmp" />
+    <None Remove="Packed\Hazard.bmp" />
+    <None Remove="Packed\Map1.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Packed\CharacterIdle.tga" />
+    <EmbeddedResource Include="Packed\CharacterSwing.tga" />
+    <EmbeddedResource Include="Packed\Data.bmp" />
+    <EmbeddedResource Include="Packed\ExampleMap.bmp" />
+    <EmbeddedResource Include="Packed\Hazard.bmp" />
+    <EmbeddedResource Include="Packed\Map1.bmp" />
+  </ItemGroup>
+
+</Project>

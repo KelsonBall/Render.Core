@@ -15,7 +15,7 @@ namespace Render.Core
             ttfont = font;
         }
 
-        public (rImage texture, int kern, int yshift) this[char ch, float size, Color4 color]
+        public (Texture texture, int kern, int yshift) this[char ch, float size, Color4 color]
         {
             get
             {
@@ -62,7 +62,7 @@ namespace Render.Core
                     }
                 }
 
-                return (new rImage(pixelData.ToRgbaArray(width, height)), xOffset, height + yOffset);
+                return (new Texture(pixelData.ToRgbaArray(width, height)), xOffset, height + yOffset);
             }
         }
     }

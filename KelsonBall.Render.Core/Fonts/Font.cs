@@ -22,7 +22,7 @@ namespace Render.Core
 
         private readonly FontGenerator _generator;
 
-        private Dictionary<char, Dictionary<Color4, (rImage texture, int kern, int yshift)>> _cache = new Dictionary<char, Dictionary<Color4, (rImage texture, int kern, int yshift)>>();
+        private Dictionary<char, Dictionary<Color4, (Texture texture, int kern, int yshift)>> _cache = new Dictionary<char, Dictionary<Color4, (Texture texture, int kern, int yshift)>>();
 
         private readonly int _size;
 
@@ -94,12 +94,12 @@ namespace Render.Core
         private Func<Stream> resourceGetter(string resource) => () =>
             renderAssembly.GetManifestResourceStream(ResourceNames.Single(r => r.EndsWith(resource)));
 
-        public (rImage texture, int kern, int yshift) this[char c, Color4 color]
+        public (Texture texture, int kern, int yshift) this[char c, Color4 color]
         {
             get
             {
                 if (!_cache.ContainsKey(c))
-                    _cache[c] = new Dictionary<Color4, (rImage texture, int kern, int yshift)>();
+                    _cache[c] = new Dictionary<Color4, (Texture texture, int kern, int yshift)>();
                 if (!_cache[c].ContainsKey(color))
                     _cache[c][color] = _generator[c, _size, color];
                 return _cache[c][color];
