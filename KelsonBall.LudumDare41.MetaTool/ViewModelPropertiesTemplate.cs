@@ -1,5 +1,4 @@
-﻿using KelsonBall.LudumDare41.Items.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +17,19 @@ namespace KelsonBall.LudumDare41.MetaTool
             {
                 if (p.PropertyType.GetMethods().Any(m => m.Name == "GetEnumerator"))
                     return "";
+                else if (p.Name == "X" || p.Name == "Y")
+                    return
+                $@"
+        public {p.PropertyType.FullName} {p.Name} 
+        {{
+            get => data.{p.Name};
+            set => Set(() => 
+            {{
+                {p.Name}Adjusted = value + {p.Name}DisplayOffset;
+                data.{p.Name} = value;
+            }});
+        }}
+";
                 else
                     return
                 $@"
@@ -25,7 +37,8 @@ namespace KelsonBall.LudumDare41.MetaTool
         {{
             get => data.{p.Name};
             set => Set(() => data.{p.Name} = value);
-        }}";
+        }}
+";
             })));
         }
     }

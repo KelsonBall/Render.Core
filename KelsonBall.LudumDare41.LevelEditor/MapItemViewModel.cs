@@ -1,5 +1,4 @@
-﻿using KelsonBall.LudumDare41.Items.Models;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows.Input;
 using PubSub;
 using KelsonBall.LudumDare41.LevelEditor.Utils;
@@ -10,6 +9,24 @@ namespace KelsonBall.LudumDare41.LevelEditor
 {
     public abstract class MapItemViewModel : ViewModel
     {
+
+        public double XDisplayOffset;
+        public double YDisplayOffset;
+
+        private double _xAdjusted;
+        public double XAdjusted
+        {
+            get => _xAdjusted;
+            set => Set(() => _xAdjusted = value);
+        }
+
+        private double _yAdjusted;
+        public double YAdjusted
+        {
+            get => _yAdjusted;
+            set => Set(() => _yAdjusted = value);
+        }
+
         private string _name;
         public virtual string Name
         {

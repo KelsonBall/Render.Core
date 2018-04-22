@@ -14,21 +14,25 @@ namespace KelsonBall.LudumDare41.LevelEditor
             get => data.XA;
             set => Set(() => data.XA = value);
         }
+
         public System.Double YA 
         {
             get => data.YA;
             set => Set(() => data.YA = value);
         }
+
         public System.Double XB 
         {
             get => data.XB;
             set => Set(() => data.XB = value);
         }
+
         public System.Double YB 
         {
             get => data.YB;
             set => Set(() => data.YB = value);
         }
+
         
         public string Tags
         {

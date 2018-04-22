@@ -10,50 +10,48 @@
         <DataTemplate DataType="{x:Type local:AnimationViewModel}">
             <StackPanel>
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>SpriteSheet</Label>
-                <TextBox Text="{Binding SpriteSheet}" />
+                <TextBox Text="{Binding SpriteSheet,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Width</Label>
-                <TextBox Text="{Binding Width, StringFormat=N}" />
+                <TextBox Text="{Binding Width,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Height</Label>
-                <TextBox Text="{Binding Height, StringFormat=N}" />
+                <TextBox Text="{Binding Height,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Padding</Label>
-                <TextBox Text="{Binding Padding, StringFormat=N}" />
+                <TextBox Text="{Binding Padding,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>FrameDuration</Label>
-                <TextBox Text="{Binding FrameDuration, StringFormat=N}" />
+                <TextBox Text="{Binding FrameDuration,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:BallSpawnViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
@@ -61,210 +59,176 @@
         <DataTemplate DataType="{x:Type local:CutsceneViewModel}">
             <StackPanel>
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Animations</Label>
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
-
-
-            </StackPanel>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:PointViewModel}">
-            <StackPanel>
-                <Label>X</Label>
-                <TextBox Text="{Binding X, StringFormat=N}" />
-
-                <Label>Y</Label>
-                <TextBox Text="{Binding Y, StringFormat=N}" />
-
-                <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
-
-                <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
-
-                <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:GolfHoleViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Radius</Label>
-                <TextBox Text="{Binding Radius, StringFormat=N}" />
+                <TextBox Text="{Binding Radius,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Gravity</Label>
-                <TextBox Text="{Binding Gravity, StringFormat=N}" />
+                <TextBox Text="{Binding Gravity,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:LaserHazardViewModel}">
             <StackPanel>
-                <Label>A</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>XA</Label>
+                <TextBox Text="{Binding XA,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
-                <Label>B</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>YA</Label>
+                <TextBox Text="{Binding YA,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>XB</Label>
+                <TextBox Text="{Binding XB,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>YB</Label>
+                <TextBox Text="{Binding YB,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Event</Label>
-                <TextBox Text="{Binding Event}" />
+                <TextBox Text="{Binding Event,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:MotionDetectorHazardViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Radius</Label>
-                <TextBox Text="{Binding Radius, StringFormat=N}" />
+                <TextBox Text="{Binding Radius,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:SandHazardViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Radius</Label>
-                <TextBox Text="{Binding Radius, StringFormat=N}" />
+                <TextBox Text="{Binding Radius,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:WaterHazardViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Radius</Label>
-                <TextBox Text="{Binding Radius, StringFormat=N}" />
+                <TextBox Text="{Binding Radius,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:GaurdViewModel}">
             <StackPanel>
-                <Label>Start</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>VisionLength</Label>
-                <TextBox Text="{Binding VisionLength, StringFormat=N}" />
+                <TextBox Text="{Binding VisionLength,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>VisionArc</Label>
-                <TextBox Text="{Binding VisionArc, StringFormat=N}" />
+                <TextBox Text="{Binding VisionArc,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>ReactionTime</Label>
-                <TextBox Text="{Binding ReactionTime, StringFormat=N}" />
+                <TextBox Text="{Binding ReactionTime,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Path</Label>
                 <StackPanel Margin="8,2,2,2">
                     <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
+                    <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged}" />
                     <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
+                    <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
@@ -272,247 +236,232 @@
         <DataTemplate DataType="{x:Type local:MobPathViewModel}">
             <StackPanel>
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:DashPadViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Rotation</Label>
-                <TextBox Text="{Binding Rotation, StringFormat=N}" />
+                <TextBox Text="{Binding Rotation,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Strength</Label>
-                <TextBox Text="{Binding Strength, StringFormat=N}" />
+                <TextBox Text="{Binding Strength,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:TeleporterViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Rotation</Label>
-                <TextBox Text="{Binding Rotation, StringFormat=N}" />
+                <TextBox Text="{Binding Rotation,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>TeleporterId</Label>
-                <TextBox Text="{Binding TeleporterId, StringFormat=N}" />
+                <TextBox Text="{Binding TeleporterId,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>CooldownMs</Label>
-                <TextBox Text="{Binding CooldownMs, StringFormat=N}" />
+                <TextBox Text="{Binding CooldownMs,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Event</Label>
-                <TextBox Text="{Binding Event}" />
+                <TextBox Text="{Binding Event,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:PlayerSpawnViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:PowerPowerupViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:SpeedPowerupViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:StealthPowerupViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CircleTerrainViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Radius</Label>
-                <TextBox Text="{Binding Radius, StringFormat=N}" />
+                <TextBox Text="{Binding Radius,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Image</Label>
-                <TextBox Text="{Binding Image}" />
+                <TextBox Text="{Binding Image,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Bounce</Label>
-                <TextBox Text="{Binding Bounce, StringFormat=N}" />
+                <TextBox Text="{Binding Bounce,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>SoundLevel</Label>
-                <TextBox Text="{Binding SoundLevel, StringFormat=N}" />
+                <TextBox Text="{Binding SoundLevel,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Event</Label>
-                <TextBox Text="{Binding Event}" />
+                <TextBox Text="{Binding Event,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:RectangleTerrainViewModel}">
             <StackPanel>
-                <Label>Location</Label>
-                <StackPanel Margin="8,2,2,2">
-                    <Label>X</Label>
-                    <TextBox Text="{Binding X}" />
-                    <Label>Y</Label>
-                    <TextBox Text="{Binding Y}" />
-                </StackPanel>
+                <Label>X</Label>
+                <TextBox Text="{Binding X,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
+
+                <Label>Y</Label>
+                <TextBox Text="{Binding Y,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Width</Label>
-                <TextBox Text="{Binding Width, StringFormat=N}" />
+                <TextBox Text="{Binding Width,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Height</Label>
-                <TextBox Text="{Binding Height, StringFormat=N}" />
+                <TextBox Text="{Binding Height,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Rotation</Label>
-                <TextBox Text="{Binding Rotation, StringFormat=N}" />
+                <TextBox Text="{Binding Rotation,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Image</Label>
-                <TextBox Text="{Binding Image}" />
+                <TextBox Text="{Binding Image,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Bounce</Label>
-                <TextBox Text="{Binding Bounce, StringFormat=N}" />
+                <TextBox Text="{Binding Bounce,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>SoundLevel</Label>
-                <TextBox Text="{Binding SoundLevel, StringFormat=N}" />
+                <TextBox Text="{Binding SoundLevel,UpdateSourceTrigger=PropertyChanged, StringFormat=N}" />
 
                 <Label>Event</Label>
-                <TextBox Text="{Binding Event}" />
+                <TextBox Text="{Binding Event,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Name</Label>
-                <TextBox Text="{Binding Name}" />
+                <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Tags</Label>
-                <TextBox Text="{Binding Tags}" />
+                <TextBox Text="{Binding Tags,UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>CollisionGroups</Label>
-                <TextBox Text="{Binding CollisionGroups}" />
+                <TextBox Text="{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}" />
 
 
             </StackPanel>
         </DataTemplate>
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -528,6 +477,7 @@
             <Button Command="{Binding OpenCommand}">Open</Button>
             <Button Command="{Binding SaveCommand}">Save</Button>
         </StackPanel>
+        <local:ToolbarView DataContext="{Binding Toolbar}" Grid.Column="1" />
         <ComboBox ItemsSource="{Binding ItemNames}" Text="{Binding SelectedItemNameToAdd}" Grid.Row="1"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
             <ItemsControl ItemsSource="{Binding LevelItems}">
@@ -554,24 +504,34 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-            <ItemsControl ItemsSource="{Binding LevelItems}" x:Name="CanvasItemsControl">
+        <ScrollViewer Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Background="CornflowerBlue">
+            <ItemsControl ItemsSource="{Binding LevelItems}" x:Name="CanvasItemsControl" PreviewMouseDown="MapCanvas_PreviewMouseDown">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas x:Name="MapCanvas" Width="{Binding MapWidth}" Height="{Binding MapHeight}" PreviewMouseDown="MapCanvas_PreviewMouseDown"></Canvas>
+                        <Canvas x:Name="MapCanvas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding MapWidth}" Height="{Binding MapHeight}" PreviewMouseDown="MapCanvas_PreviewMouseDown"></Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Left" Value="{Binding Path=X, Converter={StaticResource xToLeftConverter}}" />
-                        <Setter Property="Canvas.Top" Value="{Binding Y, Converter={StaticResource yToTopConverter}}" />
+                        <Setter Property="Canvas.Left" Value="{Binding XAdjusted}" />
+                        <Setter Property="Canvas.Top" Value="{Binding YAdjusted}" />
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding SelectItemCommand}"  DataContext="{Binding}" ToolTip="{Binding Name}">
-                            <Ellipse Fill="Red" Stroke="Black" Height="5" Width="5" />
-                        </Button>
+                        <Grid Background="Green">
+                            <Button Command="{Binding SelectItemCommand}"  DataContext="{Binding}" ToolTip="{Binding Name}">
+                                <Ellipse Fill="Red" Stroke="Black" Height="5" Width="5" />
+                            </Button>
+                            <Rectangle Visibility="{Binding ., Converter={StaticResource RectangleConverter}}" Width="{Binding Width}" Height="{Binding Height}"  Fill="Yellow">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform CenterX="{Binding Width, Converter={StaticResource HalfConverter}}"
+                                                     CenterY="{Binding Height, Converter={StaticResource HalfConverter}}"
+                                                     Angle="{Binding Rotation}" />
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Ellipse Visibility="{Binding ., Converter={StaticResource CircleConverter}}" Width="{Binding Radius}" Height="{Binding Radius}" Fill="Aquamarine" />
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

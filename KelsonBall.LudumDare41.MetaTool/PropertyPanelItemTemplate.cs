@@ -27,15 +27,15 @@ namespace KelsonBall.LudumDare41.MetaTool
             string tab = string.Join("\t", Enumerable.Range(0, tabs).Select(i => ""));
             var text = new StringBuilder();
             if (p.PropertyType == typeof(int) || p.PropertyType == typeof(double))
-                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding {p.Name}, StringFormat=N}}\" />").ToString();
+                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding {p.Name},UpdateSourceTrigger=PropertyChanged, StringFormat=N}}\" />").ToString();
             if (p.PropertyType == typeof(string))
-                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding {p.Name}}}\" />").ToString();
+                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding {p.Name},UpdateSourceTrigger=PropertyChanged}}\" />").ToString();
             if (p.Name == "Tags")
-                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding Tags}}\" />").ToString();
+                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding Tags,UpdateSourceTrigger=PropertyChanged}}\" />").ToString();
             if (p.Name == "CollisionGroups")
-                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding CollisionGroups}}\" />").ToString();
+                return text.AppendLine($"{tab}<TextBox Text=\"{{Binding CollisionGroups, UpdateSourceTrigger=PropertyChanged}}\" />").ToString();
             if (Program.Types.Any(t => t == p.PropertyType))
-                return text.AppendLine($"{tab}<StackPanel Margin=\"8,2,2,2\"><Label>X</Label><TextBox Text=\"{{Binding X}}\" /><Label>Y</Label><TextBox Text=\"{{Binding Y}}\" /> </StackPanel>").ToString();
+                return text.AppendLine($"{tab}<StackPanel Margin=\"8,2,2,2\"><Label>X</Label><TextBox Text=\"{{Binding X,UpdateSourceTrigger=PropertyChanged}}\" /><Label>Y</Label><TextBox Text=\"{{Binding Y,UpdateSourceTrigger=PropertyChanged}}\" /> </StackPanel>").ToString();
             //if (p.PropertyType.GetMethods().Any(m => m.Name == "GetEnumerator"))
             //    return new ItemsControlTemplate(p).GetTemplateAsync().Result;
             return "";

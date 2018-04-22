@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KelsonBall.LudumDare41.LevelEditor.Events
+﻿namespace KelsonBall.LudumDare41.LevelEditor.Events
 {
     public class MapImagePickedEvent
     {
@@ -12,4 +6,20 @@ namespace KelsonBall.LudumDare41.LevelEditor.Events
 
         public MapImagePickedEvent(string uri) => Uri = uri;
     }
+
+    public abstract class PayloadEvent<T>
+    {
+        public readonly T Payload;
+
+        public PayloadEvent(T payload) => Payload = payload;
+    }
+
+    public class GameObjectAddedEvent : PayloadEvent<MapItemViewModel>
+    {
+        public GameObjectAddedEvent(MapItemViewModel payload) : base(payload)
+        {
+        }
+    }
+
+
 }

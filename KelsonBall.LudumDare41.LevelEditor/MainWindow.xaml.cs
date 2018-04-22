@@ -1,4 +1,5 @@
 ﻿using KelsonBall.LudumDare41.LevelEditor.Events;
+using KelsonBall.LudumDare41.LevelEditor.Utils;
 using PubSub;
 using System;
 using System.Windows;
@@ -28,7 +29,9 @@ namespace KelsonBall.LudumDare41.LevelEditor
 
         private void MapCanvas_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Console.WriteLine(e.GetPosition(CanvasItemsControl));
+            var p = e.GetPosition(CanvasItemsControl);
+            Console.WriteLine(p);
+            this.Publish(new MapClickedAtEvent((p.X - xToLeftConverter.HalfWidth, p.Y - yToTopConverter.HalfHeight)));
         }
     }
 }

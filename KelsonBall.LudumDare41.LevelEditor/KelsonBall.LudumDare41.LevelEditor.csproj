@@ -131,8 +131,11 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Events\MapClickedAtEvent.cs" />
     <Compile Include="Events\MapImagePickedEvent.cs" />
     <Compile Include="Events\MapItemSelectedEvent.cs" />
+    <Compile Include="Events\TypeSelectedEvent.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="Models\AnimationViewModel.cs" />
     <Compile Include="Models\BallSpawnViewModel.cs" />
@@ -152,6 +155,10 @@
     <Compile Include="Models\StealthPowerupViewModel.cs" />
     <Compile Include="Models\TeleporterViewModel.cs" />
     <Compile Include="Models\WaterHazardViewModel.cs" />
+    <Compile Include="ToolbarView.xaml.cs">
+      <DependentUpon>ToolbarView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ToolbarViewModel.cs" />
     <Compile Include="LevelItemsViewModel.cs" />
     <Compile Include="LevelPreviewView.xaml.cs">
@@ -212,6 +219,10 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
       <DependentUpon>PropertiesPanelViewModel.cs</DependentUpon>
     </Page>
+    <Page Include="ToolbarView.xaml">
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <DependentUpon>ToolbarViewModel.cs</DependentUpon>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KelsonBall.LudumDare41.Items\KelsonBall.LudumDare41.Items.csproj">
@@ -221,6 +232,10 @@
     <ProjectReference Include="..\KelsonBall.Render.Core\KelsonBall.Render.Core.csproj">
       <Project>{D163920B-6983-4D4E-A92F-ECA18AA528E7}</Project>
       <Name>KelsonBall.Render.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Render.Core.Vectors\Render.Core.Vectors.csproj">
+      <Project>{73348D96-A5BD-4F15-81F0-45EA6C550CB6}</Project>
+      <Name>Render.Core.Vectors</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

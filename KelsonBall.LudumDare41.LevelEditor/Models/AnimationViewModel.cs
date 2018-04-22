@@ -14,21 +14,25 @@ namespace KelsonBall.LudumDare41.LevelEditor
             get => data.Width;
             set => Set(() => data.Width = value);
         }
+
         public System.Int32 Height 
         {
             get => data.Height;
             set => Set(() => data.Height = value);
         }
+
         public System.Int32 Padding 
         {
             get => data.Padding;
             set => Set(() => data.Padding = value);
         }
+
         public System.Int32 FrameDuration 
         {
             get => data.FrameDuration;
             set => Set(() => data.FrameDuration = value);
         }
+
         
         public string Tags
         {

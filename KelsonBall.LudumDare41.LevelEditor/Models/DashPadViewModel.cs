@@ -12,23 +12,35 @@ namespace KelsonBall.LudumDare41.LevelEditor
         public System.Double X 
         {
             get => data.X;
-            set => Set(() => data.X = value);
+            set => Set(() => 
+            {
+                XAdjusted = value + XDisplayOffset;
+                data.X = value;
+            });
         }
+
         public System.Double Y 
         {
             get => data.Y;
-            set => Set(() => data.Y = value);
+            set => Set(() => 
+            {
+                YAdjusted = value + YDisplayOffset;
+                data.Y = value;
+            });
         }
+
         public System.Double Rotation 
         {
             get => data.Rotation;
             set => Set(() => data.Rotation = value);
         }
+
         public System.Double Strength 
         {
             get => data.Strength;
             set => Set(() => data.Strength = value);
         }
+
         
         public string Tags
         {

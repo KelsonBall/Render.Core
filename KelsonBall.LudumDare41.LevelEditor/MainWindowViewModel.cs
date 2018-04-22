@@ -24,7 +24,7 @@ namespace KelsonBall.LudumDare41.LevelEditor
         }
 
         private ToolbarViewModel _menu;
-        public ToolbarViewModel Menu
+        public ToolbarViewModel Toolbar
         {
             get => _menu;
             set => Set(() => _menu = value);
@@ -74,15 +74,20 @@ namespace KelsonBall.LudumDare41.LevelEditor
             get => _selectedItemNameToAdd;
             set => Set(() =>
             {
-                _selectedItemNameToAdd = null;
-                var selectedType = MapItemTypes.Single(t => t.Name == value);
-                var item = (MapItemViewModel) Activator.CreateInstance(selectedType);
-                var modelType = selectedType.BaseType.GenericTypeArguments.Single();
-                var data = Activator.CreateInstance(modelType);
-                selectedType.GetMethod("Load").Invoke(item, new[] { data });
-                item.Name = modelType.Name;
-                LevelItems.Add(item);
+                _selectedItemNameToAdd = value;
+                this.Publish(new TypeSelectedEvent(value));
             });
+        }
+
+        public static MapItemViewModel GetBlankItemByTypeName(string value)
+        {
+            var selectedType = MapItemTypes.Single(t => t.Name == value);
+            var item = (MapItemViewModel)Activator.CreateInstance(selectedType);
+            var modelType = selectedType.BaseType.GenericTypeArguments.Single();
+            var data = Activator.CreateInstance(modelType);
+            selectedType.GetMethod("Load").Invoke(item, new[] { data });
+            item.Name = modelType.Name;
+            return item;
         }
 
         private string _openLevel;
@@ -98,6 +103,7 @@ namespace KelsonBall.LudumDare41.LevelEditor
         public MainWindowViewModel()
         {
             Properties = new PropertiesPanelViewModel();
+            Toolbar = new ToolbarViewModel();
             ItemNames.AddRange(MapItemTypes.Select(t => t.Name));
 
             OpenCommand = new ActionCommand(OpenAction);
@@ -108,6 +114,16 @@ namespace KelsonBall.LudumDare41.LevelEditor
                 LevelItems.Remove(args.Vm);
                 if (SelectedItem == args.Vm)
                     SelectedItem = null;
+            });
+            this.Subscribe<GameObjectAddedEvent>(args =>
+            {
+                LevelItems.Add(args.Payload);
+                args.Payload.XDisplayOffset += xToLeftConverter.HalfWidth;
+                args.Payload.YDisplayOffset += yToTopConverter.HalfHeight;
+                args.Payload.XAdjusted = args.Payload.TryGetProperty("X", 0d) + args.Payload.XDisplayOffset;
+                args.Payload.YAdjusted = args.Payload.TryGetProperty("Y", 0d) + args.Payload.YDisplayOffset;
+
+                this.Publish(new MapItemSelectedEvent(args.Payload));
             });
         }
 

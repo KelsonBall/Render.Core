@@ -7,5 +7,8 @@
     <Application.Resources>
         <utils:xToLeftConverter x:Key="xToLeftConverter" />
         <utils:yToTopConverter x:Key="yToTopConverter" />
+        <utils:HalfConverter x:Key="HalfConverter" />
+        <utils:RectangleConverter x:Key="RectangleConverter" />
+        <utils:CircleConverter x:Key="CircleConverter" />
     </Application.Resources>
 </Application>
