@@ -1,7 +1,10 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
+using Render.Core.Images;
+using Render.Core.Images.PixelFormats;
+using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Render.Core.GraphicsInterface
 {
@@ -19,11 +22,14 @@ namespace Render.Core.GraphicsInterface
     {
         ManagedGraphicsService GraphicsService { get; }
         int Handle { get; }
-        AssetBinding Binding();        
+        AssetBinding Binding();
     }
 
     public interface IShader : IManagedAssetHandle
     {
+        void IncludeUniform<T>(IUniform<T> uniform) where T : struct;
+        void IncludeBuffer<T>(IFrameBuffer<T> buffer) where T : struct;
+        void IncludeTexture(ITexture texture);
 
     }
 
@@ -33,27 +39,80 @@ namespace Render.Core.GraphicsInterface
         IShader VertexShader { get; }
     }
 
-    public interface IUniform<T> : IManagedAssetHandle
+    public interface IUniform<T> : IManagedAssetHandle where T : struct
     {
         T Value { get; set; }
+        string Name { get; }
     }
 
-    public interface IFrameBuffer : IManagedAssetHandle
+    public interface IFrameBuffer<T> : IManagedAssetHandle where T : struct
     {
 
     }
 
-    public interface ITexture : IManagedAssetHandle
-    {
-        this ARGB
-        int Width { get; }
-        int Height { get; }
+    public interface ITexture : IManagedAssetHandle, IImage
+    {                
         OpenTK.Graphics.OpenGL.TextureBufferTarget BufferTarget { get; }
         OpenTK.Graphics.OpenGL.TextureMagFilter MagFilter { get; }
         OpenTK.Graphics.OpenGL.TextureMinFilter MinFilter { get; }
         OpenTK.Graphics.OpenGL.TextureTarget Target { get; }
         OpenTK.Graphics.OpenGL.TextureUnit Unit { get; }
         OpenTK.Graphics.OpenGL.TextureWrapMode WrapMode { get; }
+    }
+
+    public class Texture : ITexture
+    {
+        internal Texture(ManagedGraphicsService graphics, IImage image)
+        {
+
+        }
+
+        public IPixelFormatRgba<byte> this[int x, int y] => throw new NotImplementedException();
+
+        public TextureBufferTarget BufferTarget => throw new NotImplementedException();
+
+        public TextureMagFilter MagFilter => throw new NotImplementedException();
+
+        public TextureMinFilter MinFilter => throw new NotImplementedException();
+
+        public TextureTarget Target => throw new NotImplementedException();
+
+        public TextureUnit Unit => throw new NotImplementedException();
+
+        public TextureWrapMode WrapMode => throw new NotImplementedException();
+
+        public ManagedGraphicsService GraphicsService => throw new NotImplementedException();
+
+        public int Handle => throw new NotImplementedException();
+
+        public int Width => throw new NotImplementedException();
+
+        public int Height => throw new NotImplementedException();
+
+        public AssetBinding Binding()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<IPixelFormatRgba<byte>> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WithDataPtr(Action<IntPtr> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ManagedGraphicsService : IDisposable

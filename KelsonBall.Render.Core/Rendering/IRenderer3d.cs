@@ -22,6 +22,5 @@ namespace Render.Core.Rendering
         IRenderer3d Model(Vector3 position, Model model, TextureMap map);
         IRenderer3d Model(Vector3 position, Model model, Color4 color);
         IRenderer3d Model(Vector3 position, Model model, Color4[] vertexColors);
-
     }
 }
