@@ -5,14 +5,14 @@ namespace Render.Core.Transforms
     /// <summary>
     /// A transform implementation providing full 4x4 afine transformation matricies for linear transformations in R3 space
     /// </summary>
-    public class CoordinateFrame : Transform<Rektor3>
+    public class CoordinateFrame : Transform<Vector3>
     {
         public static CoordinateFrame Unit =>
             new CoordinateFrame
             {
-                Scale = Rektor3.one,
-                Translation = Rektor3.O,
-                Rotation = Rektor3.O
+                Scale = Vector3.one,
+                Translation = Vector3.O,
+                Rotation = Vector3.O
             };
 
         public CoordinateFrame() : base(4)
@@ -28,13 +28,13 @@ namespace Render.Core.Transforms
             Matrix = stack.Aggregate.Matrix;
         }
 
-        public Rektor3 Forward => ApplyTo(Rektor3.î) - Position;
-        public Rektor3 Left => ApplyTo(Rektor3.ĵ) - Position;
-        public Rektor3 Up => ApplyTo(Rektor3.k̂) - Position;
+        public Vector3 Forward => ApplyTo(Vector3.î) - Position;
+        public Vector3 Left => ApplyTo(Vector3.ĵ) - Position;
+        public Vector3 Up => ApplyTo(Vector3.k̂) - Position;
 
-        private Transform<Rektor3> scaleTransform = Transform3.Scale(1);
-        private Rektor3 scale;
-        public Rektor3 Scale
+        private Transform<Vector3> scaleTransform = Transform3.Scale(1);
+        private Vector3 scale;
+        public Vector3 Scale
         {
             get => scale;
             set
@@ -48,39 +48,39 @@ namespace Render.Core.Transforms
         public CoordinateFrame ScaleBy(double scale)
         {
             float s = (float)scale;
-            Scale = new Rektor3(Scale.X * s, Scale.Y * s, Scale.Z * s);
+            Scale = new Vector3(Scale.X * s, Scale.Y * s, Scale.Z * s);
             return this;
         }
 
         public CoordinateFrame ScaleBy(double x, double y, double z)
         {
-            return ScaleBy(new Rektor3((float)x, (float)y, (float)z));
+            return ScaleBy(new Vector3((float)x, (float)y, (float)z));
         }
 
-        public CoordinateFrame ScaleBy(Rektor3 s)
+        public CoordinateFrame ScaleBy(Vector3 s)
         {
-            Scale = new Rektor3(Scale.X * s.X, Scale.Y * s.Y, Scale.Z * s.Z);
+            Scale = new Vector3(Scale.X * s.X, Scale.Y * s.Y, Scale.Z * s.Z);
             return this;
         }
 
-        private Transform<Rektor3> rotationTransform = Transform3.Rotation(0, 1, 0, 0);
-        private Rektor3 rotation;
-        public Rektor3 Rotation
+        private Transform<Vector3> rotationTransform = Transform3.Rotation(0, 1, 0, 0);
+        private Vector3 rotation;
+        public Vector3 Rotation
         {
             get => rotation;
             set
             {
                 rotation = value;
                 var stack = Transform3.NewTransformStack();
-                stack.Push(Transform3.Rotation(value.Z, Rektor3.k̂));
-                stack.Push(Transform3.Rotation(value.Y, Rektor3.î));
-                stack.Push(Transform3.Rotation(value.X, Rektor3.ĵ));
+                stack.Push(Transform3.Rotation(value.Z, Vector3.k̂));
+                stack.Push(Transform3.Rotation(value.Y, Vector3.î));
+                stack.Push(Transform3.Rotation(value.X, Vector3.ĵ));
                 rotationTransform = stack.Aggregate;
                 Calculate();
             }
         }
 
-        public CoordinateFrame RotateBy(Rektor3 Θ)
+        public CoordinateFrame RotateBy(Vector3 Θ)
         {
             Rotation += Θ;
             return this;
@@ -88,13 +88,13 @@ namespace Render.Core.Transforms
 
         public CoordinateFrame RotateBy(double x, double y, double z)
         {
-            Rotation += (new Rektor3((float)x, (float)y, (float)z));
+            Rotation += (new Vector3((float)x, (float)y, (float)z));
             return this;
         }
 
-        private Transform<Rektor3> translationTransform = Transform3.Translation(0, 0, 0);
-        private Rektor3 translation;
-        public Rektor3 Translation
+        private Transform<Vector3> translationTransform = Transform3.Translation(0, 0, 0);
+        private Vector3 translation;
+        public Vector3 Translation
         {
             get => translation;
             set
@@ -105,7 +105,7 @@ namespace Render.Core.Transforms
             }
         }
 
-        public CoordinateFrame TranslateBy(Rektor3 translation)
+        public CoordinateFrame TranslateBy(Vector3 translation)
         {
             Translation += translation;
             return this;
@@ -113,18 +113,18 @@ namespace Render.Core.Transforms
 
         public CoordinateFrame TranslateBy(double x, double y, double z)
         {
-            return TranslateBy(new Rektor3((float)x, (float)y, (float)z));
+            return TranslateBy(new Vector3((float)x, (float)y, (float)z));
         }
 
-        public Rektor3 Position => ApplyTo(Rektor3.O);
+        public Vector3 Position => ApplyTo(Vector3.O);
 
-        public override Rektor3 ApplyTo(Rektor3 v)
+        public override Vector3 ApplyTo(Vector3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
             return (transform * affineVector);
         }
 
-        public override Rektor3 ApplyInverse(Rektor3 v)
+        public override Vector3 ApplyInverse(Vector3 v)
         {
             var affineVector = VectorConversions.GetMathVector(v.X, v.Y, v.Z, 1);
             return (Inverse * affineVector);

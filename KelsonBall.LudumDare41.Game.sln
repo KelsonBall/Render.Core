@@ -3,49 +3,53 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.LudumDare41.Game", "KelsonBall.LudumDare41.Game\KelsonBall.LudumDare41.Game.csproj", "{4639FE98-6995-478F-9248-3E78C5302400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KelsonBall.LudumDare41.Game", "KelsonBall.LudumDare41.Game\KelsonBall.LudumDare41.Game.csproj", "{4639FE98-6995-478F-9248-3E78C5302400}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Render.Core", "Render.Core", "{2DC0D2D7-AF86-4F8F-9B14-5BF9C1C48978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.Render.Core", "KelsonBall.Render.Core\KelsonBall.Render.Core.csproj", "{D163920B-6983-4D4E-A92F-ECA18AA528E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KelsonBall.Render.Core", "KelsonBall.Render.Core\KelsonBall.Render.Core.csproj", "{D163920B-6983-4D4E-A92F-ECA18AA528E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.GraphicsInterfaces", "Render.Core.GraphicsInterfaces\Render.Core.GraphicsInterfaces.csproj", "{75F47AC0-50AB-4F44-A1D3-711B6026A483}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.GraphicsInterfaces", "Render.Core.GraphicsInterfaces\Render.Core.GraphicsInterfaces.csproj", "{75F47AC0-50AB-4F44-A1D3-711B6026A483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.WindowInterface", "Render.Core.WindowInterface\Render.Core.WindowInterface.csproj", "{82B2FF67-31D6-4947-8936-5F07C261ABEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.WindowInterface", "Render.Core.WindowInterface\Render.Core.WindowInterface.csproj", "{82B2FF67-31D6-4947-8936-5F07C261ABEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueTypeSharp.NetStandard", "TrueTypeSharp.NetStandard\TrueTypeSharp.NetStandard.csproj", "{00063478-C1FA-4F28-970E-DF286154B877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTypeSharp.NetStandard", "TrueTypeSharp.NetStandard\TrueTypeSharp.NetStandard.csproj", "{00063478-C1FA-4F28-970E-DF286154B877}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.Vectors", "Render.Core.Vectors\Render.Core.Vectors.csproj", "{73348D96-A5BD-4F15-81F0-45EA6C550CB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.Vectors", "Render.Core.Vectors\Render.Core.Vectors.csproj", "{73348D96-A5BD-4F15-81F0-45EA6C550CB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VelcroPhysics", "VelcroPhysics", "{BA7D3185-501F-4F0E-8FDC-55AFCF44E78E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics", "Physics\Physics.csproj", "{867BB112-F90A-437A-8007-6BDD791B6A5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Physics", "Physics\Physics.csproj", "{867BB112-F90A-437A-8007-6BDD791B6A5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.LudumDare41.Scenes", "KelsonBall.LudumDare41.Scenes\KelsonBall.LudumDare41.Scenes.csproj", "{0945255E-212D-47A8-B713-400D5132B7DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KelsonBall.LudumDare41.Scenes", "KelsonBall.LudumDare41.Scenes\KelsonBall.LudumDare41.Scenes.csproj", "{0945255E-212D-47A8-B713-400D5132B7DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderCore.Game", "RenderCore.Game\RenderCore.Game.csproj", "{CBC80274-9DB3-40F9-8951-44D2F8298287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenderCore.Game", "RenderCore.Game\RenderCore.Game.csproj", "{CBC80274-9DB3-40F9-8951-44D2F8298287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.Transforms", "Render.Core.Transforms\Render.Core.Transforms.csproj", "{0870D836-EA10-4E12-841D-082C63C92D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.Transforms", "Render.Core.Transforms\Render.Core.Transforms.csproj", "{0870D836-EA10-4E12-841D-082C63C92D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.BadPuns", "Render.Core.BadPuns\Render.Core.BadPuns.csproj", "{4581D637-7715-45E1-84D6-56A6D0CE8485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.BadPuns", "Render.Core.BadPuns\Render.Core.BadPuns.csproj", "{4581D637-7715-45E1-84D6-56A6D0CE8485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.UI", "Render.Core.UI\Render.Core.UI.csproj", "{AF35CA5D-80EA-4195-BBED-50FAB40C03BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.UI", "Render.Core.UI\Render.Core.UI.csproj", "{AF35CA5D-80EA-4195-BBED-50FAB40C03BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.Shapes", "Render.Core.Shapes\Render.Core.Shapes.csproj", "{1E15F450-1125-4687-9820-896D19E50568}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.Shapes", "Render.Core.Shapes\Render.Core.Shapes.csproj", "{1E15F450-1125-4687-9820-896D19E50568}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{6CBC92F3-823E-43C2-AA05-6B2E3D6D146F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LudumDare41", "LudumDare41", "{0CA0B414-B0F7-4F37-A8DA-3D00BED644FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.LudumDare41.Assets", "KelsonBall.LudumDare41.Assets\KelsonBall.LudumDare41.Assets.csproj", "{BBA65472-7700-49AE-B7E0-505A1999D386}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KelsonBall.LudumDare41.Assets", "KelsonBall.LudumDare41.Assets\KelsonBall.LudumDare41.Assets.csproj", "{BBA65472-7700-49AE-B7E0-505A1999D386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.LudumDare41.Items", "KelsonBall.LudumDare41.Items\KelsonBall.LudumDare41.Items.csproj", "{F120823A-6013-484B-B9D7-8C35FD592422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KelsonBall.LudumDare41.Items", "KelsonBall.LudumDare41.Items\KelsonBall.LudumDare41.Items.csproj", "{F120823A-6013-484B-B9D7-8C35FD592422}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{1DE4A463-9ABD-488C-BA38-AEECBA44CF3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.LudumDare41.LevelEditor", "KelsonBall.LudumDare41.LevelEditor\KelsonBall.LudumDare41.LevelEditor.csproj", "{237BAF6C-C512-4969-91E8-D2716CD91D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelsonBall.LudumDare41.MetaTool", "KelsonBall.LudumDare41.MetaTool\KelsonBall.LudumDare41.MetaTool.csproj", "{AAD10F61-0F43-4248-B2E6-9E7E593CFD1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KelsonBall.LudumDare41.MetaTool", "KelsonBall.LudumDare41.MetaTool\KelsonBall.LudumDare41.MetaTool.csproj", "{AAD10F61-0F43-4248-B2E6-9E7E593CFD1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LudemDare42", "LudemDare42", "{A368642B-2EDD-4583-A29E-E2F306B6222B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputTestApp", "InputTestApp\InputTestApp.csproj", "{B62FE737-93FB-4AD7-BBC1-DF0883F630AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +125,10 @@ Global
 		{AAD10F61-0F43-4248-B2E6-9E7E593CFD1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAD10F61-0F43-4248-B2E6-9E7E593CFD1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAD10F61-0F43-4248-B2E6-9E7E593CFD1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B62FE737-93FB-4AD7-BBC1-DF0883F630AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B62FE737-93FB-4AD7-BBC1-DF0883F630AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B62FE737-93FB-4AD7-BBC1-DF0883F630AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B62FE737-93FB-4AD7-BBC1-DF0883F630AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +153,8 @@ Global
 		{1DE4A463-9ABD-488C-BA38-AEECBA44CF3A} = {0CA0B414-B0F7-4F37-A8DA-3D00BED644FD}
 		{237BAF6C-C512-4969-91E8-D2716CD91D19} = {1DE4A463-9ABD-488C-BA38-AEECBA44CF3A}
 		{AAD10F61-0F43-4248-B2E6-9E7E593CFD1B} = {1DE4A463-9ABD-488C-BA38-AEECBA44CF3A}
+		{A368642B-2EDD-4583-A29E-E2F306B6222B} = {6CBC92F3-823E-43C2-AA05-6B2E3D6D146F}
+		{B62FE737-93FB-4AD7-BBC1-DF0883F630AF} = {A368642B-2EDD-4583-A29E-E2F306B6222B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D726E5CB-7A09-416D-B4F5-F58814FDB5EB}

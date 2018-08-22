@@ -18,11 +18,16 @@ namespace Render.Core.GraphicsInterface
             public (Type type, string name, object value)[] CallParams { get; set; }
         }
 
-        private readonly Queue<GlCallRecord> _calls = new Queue<GlCallRecord>(1024);
+        public DebugGraphicsInterface(int callRecordLength = 100)
+        {
+            this.callRecordLength = callRecordLength;
+        }
 
+        private readonly Queue<GlCallRecord> _calls = new Queue<GlCallRecord>(1024);
+        private readonly int callRecordLength;
         private void EnqueueCallRecord(GlCallRecord record)
         {
-            if (_calls.Count > 1000)
+            if (_calls.Count > callRecordLength)
                 _calls.Dequeue();
             _calls.Enqueue(record);
         }

@@ -35,16 +35,16 @@ namespace KelsonBall.Geometry
         }
     }
 
-    public class Ray3 : Ray<Rektor3>
+    public class Ray3 : Ray<Vector3>
     {
-        public Ray3(Rektor3 o, Rektor3 d) : base(o, default(Rektor3) /* d.Unit() */) { }
+        public Ray3(Vector3 o, Vector3 d) : base(o, default(Vector3) /* d.Unit() */) { }
 
-        public override Ray<Rektor3> ApplyTransform(Transform<Rektor3> transform)
+        public override Ray<Vector3> ApplyTransform(Transform<Vector3> transform)
         {
             return new Ray3(transform.ApplyTo(Origin), transform.ApplyTo(Direction));
         }
 
-        public override Ray<Rektor3> ApplyInverse(Transform<Rektor3> transform)
+        public override Ray<Vector3> ApplyInverse(Transform<Vector3> transform)
         {
             return new Ray3(transform.ApplyInverse(Origin), transform.ApplyInverse(Direction));
         }

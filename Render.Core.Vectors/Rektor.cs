@@ -74,7 +74,7 @@ namespace Render.Core.Vectors
 
         public Rektor Perpendicular() => new Rektor(-Y, X).Unit();
 
-        public Rektor3 ToVector3() => new Rektor3(X, Y, 0);
+        public Vector3 ToVector3() => new Vector3(X, Y, 0);
 
         public Rektor Add(Rektor to) => new Rektor(X + to.X, Y + to.Y);
 

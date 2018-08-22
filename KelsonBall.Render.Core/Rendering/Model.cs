@@ -17,13 +17,13 @@ namespace Render.Core.Rendering
             }
         }
 
-        public readonly Rektor3[] Verticies;
-        public readonly Rektor3[] Normals;
+        public readonly Vector3[] Verticies;
+        public readonly Vector3[] Normals;
         public readonly TriangleMap[] Triangles;
 
         public Model(
-            Rektor3[] verticies,
-            Rektor3[] normals,
+            Vector3[] verticies,
+            Vector3[] normals,
             TriangleMap[] triangles)
         {
             Verticies = verticies;

@@ -10,18 +10,18 @@ namespace Render.Core.Rendering
         IRenderer3d EndDraw();
 
         IRenderer3d Background(Color4 color);
-        IRenderer3d Triangle(Rektor3 a, Rektor3 b, Rektor3 c);
-        IRenderer3d Box(Rektor3 position, Rektor3 size);
-        IRenderer3d Quad(Rektor3 a, Rektor3 b, Rektor3 c, Rektor3 d);
-        IRenderer3d Ellipsoid(Rektor3 position, Rektor3 size);
-        IRenderer3d Line(Rektor3 a, Rektor3 b);
-        IRenderer3d Image(Texture image, Rektor3 position, Rektor3 normal);
-        IRenderer3d Text(string text, Rektor3 position, Rektor3 normal);
-        IRenderer3d Shape(Rektor3 position, params Rektor3[] points);
+        IRenderer3d Triangle(Vector3 a, Vector3 b, Vector3 c);
+        IRenderer3d Box(Vector3 position, Vector3 size);
+        IRenderer3d Quad(Vector3 a, Vector3 b, Vector3 c, Vector3 d);
+        IRenderer3d Ellipsoid(Vector3 position, Vector3 size);
+        IRenderer3d Line(Vector3 a, Vector3 b);
+        IRenderer3d Image(Texture image, Vector3 position, Vector3 normal);
+        IRenderer3d Text(string text, Vector3 position, Vector3 normal);
+        IRenderer3d Shape(Vector3 position, params Vector3[] points);
 
-        IRenderer3d Model(Rektor3 position, Model model, TextureMap map);
-        IRenderer3d Model(Rektor3 position, Model model, Color4 color);
-        IRenderer3d Model(Rektor3 position, Model model, Color4[] vertexColors);
+        IRenderer3d Model(Vector3 position, Model model, TextureMap map);
+        IRenderer3d Model(Vector3 position, Model model, Color4 color);
+        IRenderer3d Model(Vector3 position, Model model, Color4[] vertexColors);
 
     }
 }

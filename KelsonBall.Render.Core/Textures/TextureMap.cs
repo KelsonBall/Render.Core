@@ -5,9 +5,9 @@ namespace Render.Core.Textures
     public class TextureMap
     {
         public readonly Texture Texture;
-        public readonly Rektor3[] UvVerticies;
+        public readonly Vector3[] UvVerticies;
 
-        public TextureMap(Texture texture, Rektor3[] uvVerticies)
+        public TextureMap(Texture texture, Vector3[] uvVerticies)
         {
             Texture = texture;
             UvVerticies = uvVerticies;
