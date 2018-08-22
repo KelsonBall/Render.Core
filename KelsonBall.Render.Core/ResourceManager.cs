@@ -18,11 +18,9 @@ namespace Render.Core
             Tga24       = 3,
             Tga32       = 2,
             Tga32Sheet  = 4,
-
-
         }
 
-        public static IEnumerable<string>
+        //public static IEnumerable<string>
 
         private static readonly HashSet<string> prefixes = new HashSet<string>();
 
