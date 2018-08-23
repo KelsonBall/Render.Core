@@ -5,8 +5,22 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="Kelson.Common.Transforms" Version="0.1.0" />
+    <PackageReference Include="Kelson.Common.Vectors" Version="0.1.0" />
     <PackageReference Include="OpenTK.NETCore" Version="1.1.2749.6433" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Core.Images\Render.Core.Images.csproj" />
   </ItemGroup>
 
 </Project>

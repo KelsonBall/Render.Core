@@ -1,135 +1,120 @@
-﻿using OpenTK.Graphics.OpenGL;
-using Render.Core.Images;
-using Render.Core.Images.PixelFormats;
+﻿using Kelson.Common.Vectors;
+using OpenTK.Graphics.OpenGL;
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Render.Core.GraphicsInterface
 {
-    public readonly struct AssetBinding : IDisposable
-    {
-        private readonly Action dispose;
-
-        public AssetBinding(Action dispose)
-            => this.dispose = dispose;
-
-        public void Dispose() => dispose();
-    }
-
-    public interface IManagedAssetHandle : IDisposable
-    {
-        ManagedGraphicsService GraphicsService { get; }
-        int Handle { get; }
-        AssetBinding Binding();
-    }
-
-    public interface IShader : IManagedAssetHandle
-    {
-        void IncludeUniform<T>(IUniform<T> uniform) where T : struct;
-        void IncludeBuffer<T>(IFrameBuffer<T> buffer) where T : struct;
-        void IncludeTexture(ITexture texture);
-
-    }
-
-    public interface IProgram : IManagedAssetHandle
-    {
-        IShader FragmentShader { get; }
-        IShader VertexShader { get; }
-    }
-
-    public interface IUniform<T> : IManagedAssetHandle where T : struct
-    {
-        T Value { get; set; }
-        string Name { get; }
-    }
-
-    public interface IFrameBuffer<T> : IManagedAssetHandle where T : struct
-    {
-
-    }
-
-    public interface ITexture : IManagedAssetHandle, IImage
-    {                
-        OpenTK.Graphics.OpenGL.TextureBufferTarget BufferTarget { get; }
-        OpenTK.Graphics.OpenGL.TextureMagFilter MagFilter { get; }
-        OpenTK.Graphics.OpenGL.TextureMinFilter MinFilter { get; }
-        OpenTK.Graphics.OpenGL.TextureTarget Target { get; }
-        OpenTK.Graphics.OpenGL.TextureUnit Unit { get; }
-        OpenTK.Graphics.OpenGL.TextureWrapMode WrapMode { get; }
-    }
-
-    public class Texture : ITexture
-    {
-        internal Texture(ManagedGraphicsService graphics, IImage image)
-        {
-
-        }
-
-        public IPixelFormatRgba<byte> this[int x, int y] => throw new NotImplementedException();
-
-        public TextureBufferTarget BufferTarget => throw new NotImplementedException();
-
-        public TextureMagFilter MagFilter => throw new NotImplementedException();
-
-        public TextureMinFilter MinFilter => throw new NotImplementedException();
-
-        public TextureTarget Target => throw new NotImplementedException();
-
-        public TextureUnit Unit => throw new NotImplementedException();
-
-        public TextureWrapMode WrapMode => throw new NotImplementedException();
-
-        public ManagedGraphicsService GraphicsService => throw new NotImplementedException();
-
-        public int Handle => throw new NotImplementedException();
-
-        public int Width => throw new NotImplementedException();
-
-        public int Height => throw new NotImplementedException();
-
-        public AssetBinding Binding()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<IPixelFormatRgba<byte>> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WithDataPtr(Action<IntPtr> action)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class ManagedGraphicsService : IDisposable
     {
 
-        private readonly IGraphicsInterface gl;
-        private readonly ConcurrentBag<IManagedAssetHandle> assets = new ConcurrentBag<IManagedAssetHandle>();
+        public readonly IGraphicsInterface gl;
+        private readonly List<IManagedAssetHandle> assets = new List<IManagedAssetHandle>();
 
         public ManagedGraphicsService(IGraphicsInterface graphics)
         {
             gl = graphics;
         }
 
+        public ShaderProgram CreateProgram(string vertexShader = null, string fragmentShader = null)
+        {
+            var program = new ShaderProgram(this, vertexShader, fragmentShader);
+            assets.Add(program);
+            return program;
+        }
+
+        public VertShader CreateVertexShader(string source = null)
+        {
+            var shader = new VertShader(this, program: source);
+            assets.Add(shader);
+            return shader;
+        }
+
+        public FragShader CreateFragmentShader(string source = null)
+        {
+            var shader = new FragShader(this, program: source);
+            assets.Add(shader);
+            return shader;
+        }
+
+        public VertexBufferObject CreateVertexBuffer(IEnumerable<Vector3fd> vectors)
+        {
+            var buffer = new VertexBufferObject(this, vectors);
+            assets.Add(buffer);
+            return buffer;
+        }
+
+        public VertexBufferObject CreateVertexBuffer(IEnumerable<Vector2fd> vectors)
+        {
+            var buffer = new VertexBufferObject(this, vectors.Select(v => new Vector3fd(v, 0f)));
+            assets.Add(buffer);
+            return buffer;
+        }
+
         public void Dispose()
         {
-            while (assets.TryTake(out IManagedAssetHandle asset))            
-                asset.Dispose();            
+            //while (assets.Any())
+            //{
+            //    var asset = assets[assets.Count - 1];
+            //    assets.RemoveAt(assets.Count - 1);
+            //    asset.Dispose();
+            //}
         }
+    }
+
+    public class VertexBufferObject : IManagedAssetHandle
+    {
+        internal VertexBufferObject(ManagedGraphicsService graphics, IEnumerable<Vector3fd> vectors)
+        {
+            this.graphics = graphics;
+            handle = graphics.gl.GenBuffer();
+            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
+            float[] data = vectors.SelectMany(v => new float[] { (float)v.X, (float)v.Y, (float)v.Z }).ToArray();
+            graphics.gl.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
+            graphics.gl.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            graphics.gl.EnableVertexAttribArray(0);
+        }
+
+        private readonly ManagedGraphicsService graphics;
+        public ManagedGraphicsService GraphicsService => throw new NotImplementedException();
+
+        private readonly int handle;
+        public int Handle => handle;
+
+        public AssetBinding Binding()
+        {
+            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
+            return new AssetBinding(() => graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, 0));
+        }
+
+        public void Dispose() => graphics.gl.DeleteShader(handle);
+    }
+
+    public class VertexArrayObject : IManagedAssetHandle
+    {
+        internal VertexArrayObject(ManagedGraphicsService graphics, IEnumerable<Vector3fd> vectors)
+        {
+            this.graphics = graphics;
+            handle = graphics.gl.GenVertexArray();
+            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
+            float[] data = vectors.SelectMany(v => new float[] { (float)v.X, (float)v.Y, (float)v.Z }).ToArray();
+            graphics.gl.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
+        }
+
+        private readonly ManagedGraphicsService graphics;
+        public ManagedGraphicsService GraphicsService => throw new NotImplementedException();
+
+        private readonly int handle;
+        public int Handle => handle;
+
+        public AssetBinding Binding()
+        {
+            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
+            return new AssetBinding(() => graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, 0));
+        }
+
+        public void Dispose() => graphics.gl.DeleteShader(handle);
     }
 }

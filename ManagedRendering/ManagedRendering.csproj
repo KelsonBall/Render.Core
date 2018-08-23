@@ -5,4 +5,12 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Kelson.Common.Vectors" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Core.GraphicsInterfaces\Render.Core.GraphicsInterfaces.csproj" />
+  </ItemGroup>
+
 </Project>

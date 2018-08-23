@@ -51,13 +51,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LudemDare42", "LudemDare42"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InputTestApp", "InputTestApp\InputTestApp.csproj", "{B62FE737-93FB-4AD7-BBC1-DF0883F630AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render.Core.Images", "Render.Core.Images\Render.Core.Images.csproj", "{33F837A9-48EB-488B-B4B6-28E60098F82D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Render.Core.Images", "Render.Core.Images\Render.Core.Images.csproj", "{33F837A9-48EB-488B-B4B6-28E60098F82D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "New", "New", "{BE7B4BA4-5A8C-496D-9AFE-9AE5CFB168FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedRendering", "ManagedRendering\ManagedRendering.csproj", "{27501DDA-E8B1-456A-9AA5-29868A3021BA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayLearningExample", "ConwayLearningExample\ConwayLearningExample.csproj", "{0A834F49-0CB2-4EE5-A313-3B5ACA018114}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagedRendering", "ManagedRendering\ManagedRendering.csproj", "{27501DDA-E8B1-456A-9AA5-29868A3021BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,10 +143,6 @@ Global
 		{27501DDA-E8B1-456A-9AA5-29868A3021BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27501DDA-E8B1-456A-9AA5-29868A3021BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27501DDA-E8B1-456A-9AA5-29868A3021BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A834F49-0CB2-4EE5-A313-3B5ACA018114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A834F49-0CB2-4EE5-A313-3B5ACA018114}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A834F49-0CB2-4EE5-A313-3B5ACA018114}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A834F49-0CB2-4EE5-A313-3B5ACA018114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,7 +172,6 @@ Global
 		{33F837A9-48EB-488B-B4B6-28E60098F82D} = {2DC0D2D7-AF86-4F8F-9B14-5BF9C1C48978}
 		{BE7B4BA4-5A8C-496D-9AFE-9AE5CFB168FE} = {6CBC92F3-823E-43C2-AA05-6B2E3D6D146F}
 		{27501DDA-E8B1-456A-9AA5-29868A3021BA} = {BE7B4BA4-5A8C-496D-9AFE-9AE5CFB168FE}
-		{0A834F49-0CB2-4EE5-A313-3B5ACA018114} = {BE7B4BA4-5A8C-496D-9AFE-9AE5CFB168FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D726E5CB-7A09-416D-B4F5-F58814FDB5EB}
