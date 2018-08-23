@@ -18,6 +18,9 @@ void main (void)
             handle = graphics.gl.CreateShader(ShaderType.FragmentShader);
             graphics.gl.ShaderSource(handle, program);
             graphics.gl.CompileShader(handle);
+            var log = graphics.gl.GetShaderInfoLog(handle);
+            if (!string.IsNullOrEmpty(log))
+                throw new InvalidOperationException(log);
         }
 
         private readonly ManagedGraphicsService graphics;

@@ -47,7 +47,7 @@ namespace Render.Core.Images.Encoding
             }
         }
 
-        public static unsafe Bitmap DecodeBitmap(this ReadOnlySpan<byte> data)
+        public static unsafe Bitmap DecodeBitmap(this byte[] data)
         {
             BmpFileHeader fileData = default;
             BmpImageHeader imageData = default;

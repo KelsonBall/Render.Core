@@ -1,7 +1,5 @@
 ﻿using Kelson.Common.Vectors;
-using OpenTK.Graphics.OpenGL;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,31 +16,35 @@ namespace Render.Core.GraphicsInterface
             gl = graphics;
         }
 
+        internal readonly Dictionary<int, ShaderProgram> ProgramHandles = new Dictionary<int, ShaderProgram>();
         public ShaderProgram CreateProgram(string vertexShader = null, string fragmentShader = null)
         {
             var program = new ShaderProgram(this, vertexShader, fragmentShader);
-            assets.Add(program);
+            ProgramHandles.Add(program.Handle, program);
             return program;
         }
 
+        internal readonly Dictionary<int, VertShader> VertexShaderHandles = new Dictionary<int, VertShader>();
         public VertShader CreateVertexShader(string source = null)
         {
             var shader = new VertShader(this, program: source);
-            assets.Add(shader);
+            VertexShaderHandles.Add(shader.Handle, shader);
             return shader;
         }
 
+        internal readonly Dictionary<int, FragShader> FragmentShaderHandles = new Dictionary<int, FragShader>();
         public FragShader CreateFragmentShader(string source = null)
         {
             var shader = new FragShader(this, program: source);
-            assets.Add(shader);
+            FragmentShaderHandles.Add(shader.Handle, shader);
             return shader;
         }
 
+        internal readonly Dictionary<int, VertexBufferObject> VertexBufferHandles = new Dictionary<int, VertexBufferObject>();
         public VertexBufferObject CreateVertexBuffer(IEnumerable<Vector3fd> vectors)
         {
             var buffer = new VertexBufferObject(this, vectors);
-            assets.Add(buffer);
+            
             return buffer;
         }
 
@@ -53,68 +55,26 @@ namespace Render.Core.GraphicsInterface
             return buffer;
         }
 
+        internal readonly Dictionary<int, VertexArrayObject> VertexArrayHandles = new Dictionary<int, VertexArrayObject>();
+        public VertexArrayObject CreateVertexArray()
+        {
+            var array = new VertexArrayObject(this);
+            assets.Add(array);
+            return array;
+        }
+
         public void Dispose()
         {
-            //while (assets.Any())
-            //{
-            //    var asset = assets[assets.Count - 1];
-            //    assets.RemoveAt(assets.Count - 1);
-            //    asset.Dispose();
-            //}
+            foreach (var kvp in ProgramHandles.ToList())
+                kvp.Value.Dispose();
+            foreach (var kvp in VertexShaderHandles.ToList())
+                kvp.Value.Dispose();
+            foreach (var kvp in FragmentShaderHandles.ToList())
+                kvp.Value.Dispose();
+            foreach (var kvp in VertexBufferHandles.ToList())
+                kvp.Value.Dispose();
+            foreach (var kvp in VertexArrayHandles.ToList())
+                kvp.Value.Dispose();            
         }
-    }
-
-    public class VertexBufferObject : IManagedAssetHandle
-    {
-        internal VertexBufferObject(ManagedGraphicsService graphics, IEnumerable<Vector3fd> vectors)
-        {
-            this.graphics = graphics;
-            handle = graphics.gl.GenBuffer();
-            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
-            float[] data = vectors.SelectMany(v => new float[] { (float)v.X, (float)v.Y, (float)v.Z }).ToArray();
-            graphics.gl.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
-            graphics.gl.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-            graphics.gl.EnableVertexAttribArray(0);
-        }
-
-        private readonly ManagedGraphicsService graphics;
-        public ManagedGraphicsService GraphicsService => throw new NotImplementedException();
-
-        private readonly int handle;
-        public int Handle => handle;
-
-        public AssetBinding Binding()
-        {
-            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
-            return new AssetBinding(() => graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, 0));
-        }
-
-        public void Dispose() => graphics.gl.DeleteShader(handle);
-    }
-
-    public class VertexArrayObject : IManagedAssetHandle
-    {
-        internal VertexArrayObject(ManagedGraphicsService graphics, IEnumerable<Vector3fd> vectors)
-        {
-            this.graphics = graphics;
-            handle = graphics.gl.GenVertexArray();
-            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
-            float[] data = vectors.SelectMany(v => new float[] { (float)v.X, (float)v.Y, (float)v.Z }).ToArray();
-            graphics.gl.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
-        }
-
-        private readonly ManagedGraphicsService graphics;
-        public ManagedGraphicsService GraphicsService => throw new NotImplementedException();
-
-        private readonly int handle;
-        public int Handle => handle;
-
-        public AssetBinding Binding()
-        {
-            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
-            return new AssetBinding(() => graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, 0));
-        }
-
-        public void Dispose() => graphics.gl.DeleteShader(handle);
     }
 }

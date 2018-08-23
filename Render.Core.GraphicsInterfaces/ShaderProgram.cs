@@ -6,17 +6,16 @@ namespace Render.Core.GraphicsInterface
 {
     public class ShaderProgram : IManagedAssetHandle
     {
-
         internal ShaderProgram(ManagedGraphicsService graphics, string vertexSource, string fragmentSource)
         {
-            using (var vert = graphics.CreateVertexShader(vertexSource))
-            using (var frag = graphics.CreateFragmentShader(fragmentSource))
-            {
-                handle = graphics.gl.CreateProgram();
-                graphics.gl.AttachShader(handle, vert.Handle);
-                graphics.gl.AttachShader(handle, frag.Handle);
-                graphics.gl.LinkProgram(handle);
-            }
+            this.graphics = graphics;
+            var vert = graphics.CreateVertexShader(vertexSource);
+            var frag = graphics.CreateFragmentShader(fragmentSource);
+            
+            handle = graphics.gl.CreateProgram();
+            graphics.gl.AttachShader(handle, vert.Handle);
+            graphics.gl.AttachShader(handle, frag.Handle);            
+            graphics.gl.LinkProgram(handle);            
         }
 
         private readonly ManagedGraphicsService graphics;
@@ -33,26 +32,38 @@ namespace Render.Core.GraphicsInterface
 
         public void SetUniformFloat(string name, float value)
         {
-            int loc = graphics.gl.GetUniformLocation(handle, name);
-            graphics.gl.Uniform1(loc, value);
+            using (Binding())
+            {
+                int loc = graphics.gl.GetUniformLocation(handle, name);
+                graphics.gl.Uniform1(loc, value);
+            }
         }
 
         public void SetUniformInteger(string name, int value)
         {
-            int loc = graphics.gl.GetUniformLocation(handle, name);
-            graphics.gl.Uniform1(loc, value);
+            using (Binding())
+            {
+                int loc = graphics.gl.GetUniformLocation(handle, name);
+                graphics.gl.Uniform1(loc, value);
+            }
         }
 
         public void SetUniformTransform(string name, Transform transform)
         {
-            int loc = graphics.gl.GetUniformLocation(handle, name);
-            graphics.gl.UniformMatrix4(loc, 1, false, transform.AsSpan().ToArray());
+            using (Binding())
+            {
+                int loc = graphics.gl.GetUniformLocation(handle, name);
+                graphics.gl.UniformMatrix4(loc, 1, false, transform.AsSpan().ToArray());
+            }
         }
 
         public void SetUniformVector(string name, Vector4fd vector)
         {
-            int loc = graphics.gl.GetUniformLocation(handle, name);
-            graphics.gl.Uniform4(loc, 4, vector.AsSpan().ToArray());
+            using (Binding())
+            {
+                int loc = graphics.gl.GetUniformLocation(handle, name);
+                graphics.gl.Uniform4(loc, 1, vector.AsSpan().ToArray());
+            }
         }
 
         //public void SetUniformTexture(string name, Texture texture)

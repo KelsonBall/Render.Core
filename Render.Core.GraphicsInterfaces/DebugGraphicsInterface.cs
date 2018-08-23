@@ -16,6 +16,8 @@ namespace Render.Core.GraphicsInterface
             public long Tick { get; set; }
             public string Method { get; set; }
             public (Type type, string name, object value)[] CallParams { get; set; }
+
+            public override string ToString() => $"{Method}";
         }
 
         public DebugGraphicsInterface(int callRecordLength = 100)
