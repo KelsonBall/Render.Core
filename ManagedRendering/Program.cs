@@ -12,8 +12,8 @@ namespace ManagedRendering
         const string VERTEX_SHADER_SOURCE = @"
 in vec3 position;
 
-void main() 
-{    
+void main()
+{
     gl_Position = vec4(position, 1.0);
 }
 ";
@@ -60,7 +60,7 @@ void main()
                 using (vao.Binding())
                 {
                     vbo = graphics.CreateVertexBuffer(new Vector2fd[] { (-1f, -1f), (-1f, 1f), (1f, 1f), (-1f, -1f), (1f, -1f) });
-                    program = graphics.CreateProgram(VERTEX_SHADER_SOURCE, FRAG_SHADER_SOURCE);                    
+                    program = graphics.CreateProgram(VERTEX_SHADER_SOURCE, FRAG_SHADER_SOURCE);
                 }
             }
 
@@ -68,7 +68,7 @@ void main()
             {
                 graphics.gl.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
                 graphics.gl.ClearColor(0f, 0f, 0f, 0f);
-                graphics.gl.Enable(EnableCap.Blend);                
+                graphics.gl.Enable(EnableCap.Blend);
                 base.OnLoad(e);
             }
 
@@ -88,14 +88,14 @@ void main()
                 graphics.gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
                 graphics.gl.ClearColor(0.2f, 0.3f, 0.4f, 1f);
                 graphics.gl.MatrixMode(MatrixMode.Projection);
-                graphics.gl.LoadIdentity();                
+                graphics.gl.LoadIdentity();
                 program.SetUniformVector("color", ((float)(Math.Sin(counter) / 4) + 0.5f, (float)(Math.Cos(counter) / 4) + 0.5f, 1f, 1f));
                 program.SetUniformFloat(nameof(width), width);
                 program.SetUniformFloat(nameof(thickness), thickness);
                 using (program.Binding())
                 {
                     graphics.gl.DrawArrays(PrimitiveType.TriangleStrip, 0, 5);
-                }                
+                }
 
                 SwapBuffers();
                 base.OnRenderFrame(e);

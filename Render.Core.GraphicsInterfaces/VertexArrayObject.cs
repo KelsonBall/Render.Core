@@ -10,7 +10,7 @@ namespace Render.Core.GraphicsInterface
         internal VertexArrayObject(ManagedGraphicsService graphics)
         {
             this.graphics = graphics;
-            handle = graphics.gl.GenVertexArray();            
+            handle = graphics.gl.GenVertexArray();
         }
 
         private readonly ManagedGraphicsService graphics;
@@ -25,6 +25,10 @@ namespace Render.Core.GraphicsInterface
             return new AssetBinding(() => graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, 0));
         }
 
-        public void Dispose() => graphics.gl.DeleteShader(handle);
+        public void Dispose()
+        {
+            graphics.gl.DeleteVertexArray(handle);
+            graphics.VertexArrayHandles.Remove(handle);
+        }
     }
 }

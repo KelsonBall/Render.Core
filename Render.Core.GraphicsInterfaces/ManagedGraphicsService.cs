@@ -44,7 +44,7 @@ namespace Render.Core.GraphicsInterface
         public VertexBufferObject CreateVertexBuffer(IEnumerable<Vector3fd> vectors)
         {
             var buffer = new VertexBufferObject(this, vectors);
-            
+
             return buffer;
         }
 
@@ -65,16 +65,16 @@ namespace Render.Core.GraphicsInterface
 
         public void Dispose()
         {
-            foreach (var kvp in ProgramHandles.ToList())
-                kvp.Value.Dispose();
-            foreach (var kvp in VertexShaderHandles.ToList())
-                kvp.Value.Dispose();
-            foreach (var kvp in FragmentShaderHandles.ToList())
-                kvp.Value.Dispose();
+            //foreach (var kvp in VertexShaderHandles.ToList())
+            //    kvp.Value.Dispose();
+            //foreach (var kvp in FragmentShaderHandles.ToList())
+            //    kvp.Value.Dispose();
+            //foreach (var kvp in ProgramHandles.ToList())
+            //    kvp.Value.Dispose();
             foreach (var kvp in VertexBufferHandles.ToList())
                 kvp.Value.Dispose();
             foreach (var kvp in VertexArrayHandles.ToList())
-                kvp.Value.Dispose();            
+                kvp.Value.Dispose();
         }
     }
 }

@@ -11,11 +11,11 @@ namespace Render.Core.GraphicsInterface
             this.graphics = graphics;
             var vert = graphics.CreateVertexShader(vertexSource);
             var frag = graphics.CreateFragmentShader(fragmentSource);
-            
+
             handle = graphics.gl.CreateProgram();
             graphics.gl.AttachShader(handle, vert.Handle);
-            graphics.gl.AttachShader(handle, frag.Handle);            
-            graphics.gl.LinkProgram(handle);            
+            graphics.gl.AttachShader(handle, frag.Handle);
+            graphics.gl.LinkProgram(handle);
         }
 
         private readonly ManagedGraphicsService graphics;
@@ -77,6 +77,10 @@ namespace Render.Core.GraphicsInterface
         //    }
         //}
 
-        public void Dispose() => graphics.gl.DeleteShader(handle);
+        public void Dispose()
+        {
+            graphics.gl.DeleteProgram(handle);
+            graphics.ProgramHandles.Remove(handle);
+        }
     }
 }

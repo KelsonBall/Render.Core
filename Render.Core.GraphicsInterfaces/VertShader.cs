@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
+using System.Linq;
 
 namespace Render.Core.GraphicsInterface
 {
@@ -14,6 +15,8 @@ void main()
         internal VertShader(ManagedGraphicsService graphics, string program = DEFAULT_VERTEX_SHANDER_SOURCE)
         {
             this.graphics = graphics;
+            string version = graphics.gl.GetString(StringName.ShadingLanguageVersion);
+            program = $"#version {version.Split(' ').First().Replace(".", "")}\r\n" + program;
             handle = graphics.gl.CreateShader(ShaderType.VertexShader);
             graphics.gl.ShaderSource(handle, program);
             graphics.gl.CompileShader(handle);
@@ -30,6 +33,10 @@ void main()
 
         public AssetBinding Binding() => new AssetBinding(() => { });
 
-        public void Dispose() => graphics.gl.DeleteShader(handle);
+        public void Dispose()
+        {
+            graphics.gl.DeleteShader(handle);
+            graphics.VertexShaderHandles.Remove(handle);
+        }
     }
 }
