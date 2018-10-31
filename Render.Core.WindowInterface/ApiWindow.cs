@@ -3,20 +3,31 @@ using System;
 using System.ComponentModel;
 using OpenTK.Input;
 using OpenTK.Graphics;
+using Render.Core.Input.Mouse;
+using Render.Core.Input.Keyboard;
+using System.Threading;
+using System.Collections.Concurrent;
 
 namespace Render.Core.WindowInterface
 {
     public class ApiWindow : GameWindow, IWindow
     {
         public new Rectangle ClientRectangle { get => base.ClientRectangle; }
-        public new MouseDevice Mouse { get => base.Mouse; }
-        public new KeyboardDevice Keyboard { get => base.Keyboard; }
+
+        private readonly IMouseDevice _mouseDevice;
+        public new IMouseDevice Mouse { get => _mouseDevice; }
+        private readonly IKeyboardDevice _keyboardDevice;
+        public new IKeyboardDevice Keyboard { get => _keyboardDevice; }
+
         public new VSyncMode VSync { get => base.VSync; set => base.VSync = value; }
+
         public new int Width { get => base.Width; }
         public new int Height { get => base.Height; }
 
+
         public ApiWindow(int width, int height, GraphicsMode mode, string title) : base(width, height, mode, title)
         {
+            _mouseDevice = new Input.Mouse.MouseDevice();
         }
 
         public event Action<EventArgs> OnClosedEvent;
@@ -89,49 +100,45 @@ namespace Render.Core.WindowInterface
             base.OnLoad(e);
         }
 
-        public event Action<MouseButtonEventArgs> OnMouseDownEvent;
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             OnMouseDownEvent?.Invoke(e);
             base.OnMouseDown(e);
         }
 
-        public event Action<EventArgs> OnMouseEnterEvent;
+
         protected override void OnMouseEnter(EventArgs e)
         {
             OnMouseEnterEvent?.Invoke(e);
             base.OnMouseEnter(e);
         }
 
-        public event Action<EventArgs> OnMouseLeaveEvent;
+        
         protected override void OnMouseLeave(EventArgs e)
         {
             OnMouseLeaveEvent?.Invoke(e);
             base.OnMouseLeave(e);
         }
 
-        public event Action<MouseMoveEventArgs> OnMouseMoveEvent;
+
         protected override void OnMouseMove(MouseMoveEventArgs e)
         {
             OnMouseMoveEvent?.Invoke(e);
             base.OnMouseMove(e);
         }
 
-        public event Action<MouseButtonEventArgs> OnMouseUpEvent;
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             OnMouseUpEvent?.Invoke(e);
             base.OnMouseUp(e);
         }
 
-        public event Action<MouseWheelEventArgs> OnMouseWheelEvent;
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             OnMouseWheelEvent?.Invoke(e);
             base.OnMouseWheel(e);
         }
 
-        public event Action<EventArgs> OnMoveEvent;
         protected override void OnMove(EventArgs e)
         {
             OnMoveEvent?.Invoke(e);

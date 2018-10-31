@@ -2,11 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
-namespace Render.Core.GraphicsInterface
+namespace Render.Core.GraphicsInterfaces
 {
     public class ManagedGraphicsService : IDisposable
     {
+        public event Action<int, int> ViewportChanged;
+        
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
+        public void SetViewport(int width, int height)
+        {
+            Width = width;
+            Height = height;
+            ViewportChanged?.Invoke(width, height);
+            gl.Viewport(0, 0, width, height);
+        }
 
         public readonly IGraphicsInterface gl;
         private readonly List<IManagedAssetHandle> assets = new List<IManagedAssetHandle>();
@@ -14,6 +29,23 @@ namespace Render.Core.GraphicsInterface
         public ManagedGraphicsService(IGraphicsInterface graphics)
         {
             gl = graphics;
+        }
+
+        public void Load(GameWindow window)
+        {
+            SetViewport(window.ClientRectangle.Width, window.ClientRectangle.Height);
+            gl.ClearColor(0f, 0f, 0f, 0f);
+            gl.Enable(EnableCap.Blend);
+        }
+
+        public void Clear()
+        {
+            gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            gl.ClearColor(0.2f, 0.3f, 0.4f, 1f);
+            gl.MatrixMode(MatrixMode.Modelview);
+            gl.LoadIdentity();            
+            gl.BindVertexArray(0);
+            gl.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
 
         internal readonly Dictionary<int, ShaderProgram> ProgramHandles = new Dictionary<int, ShaderProgram>();

@@ -2,10 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RenderCore.Game\RenderCore.Game.csproj" />
+    <None Remove="Render\Border.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Render\Border.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Core.GraphicsInterfaces\Render.Core.GraphicsInterfaces.csproj" />
+    <ProjectReference Include="..\Render.Core.WindowInterface\Render.Core.WindowInterface.csproj" />
   </ItemGroup>
 
 </Project>

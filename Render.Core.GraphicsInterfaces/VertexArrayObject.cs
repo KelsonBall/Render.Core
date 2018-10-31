@@ -21,8 +21,8 @@ namespace Render.Core.GraphicsInterface
 
         public AssetBinding Binding()
         {
-            graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
-            return new AssetBinding(() => graphics.gl.BindBuffer(BufferTarget.ArrayBuffer, 0));
+            graphics.gl.BindVertexArray(handle);
+            return new AssetBinding(() => graphics.gl.BindVertexArray(0));
         }
 
         public void Dispose()

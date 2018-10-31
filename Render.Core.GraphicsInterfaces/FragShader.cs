@@ -8,9 +8,12 @@ namespace Render.Core.GraphicsInterface
     {
         const string DEFAULT_FRAGMENT_SHADER_SOURCE = @"
 uniform vec4 uColor;
+
+out vec4 color;
+
 void main (void)
 {
-   gl_FragColor = uColor;
+   color = uColor;
 }
 ";
         internal FragShader(ManagedGraphicsService graphics, string program = DEFAULT_FRAGMENT_SHADER_SOURCE)
@@ -23,7 +26,7 @@ void main (void)
             graphics.gl.CompileShader(handle);
             var log = graphics.gl.GetShaderInfoLog(handle);
             if (!string.IsNullOrEmpty(log))
-                throw new InvalidOperationException(log);
+                throw new InvalidOperationException(log);            
         }
 
         private readonly ManagedGraphicsService graphics;

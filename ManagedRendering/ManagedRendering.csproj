@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Gradient.glsl" />
+    <None Remove="Grid.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Grid.glsl" />
+    <EmbeddedResource Include="Gradient.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Kelson.Common.Vectors" Version="0.1.0" />
   </ItemGroup>
 
